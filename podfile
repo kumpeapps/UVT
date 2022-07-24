@@ -1,0 +1,18 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '15.0'
+use_frameworks!
+
+plugin 'cocoapods-keys', {
+	:project => "UVT",
+	:keys => [
+		"newrelic_token"
+	],
+	:target => "UVT"
+}
+
+target 'UVT' do
+project 'UVT.xcodeproj'
+	pod 'KumpeHelpers'
+	pod 'NewRelicAgent'
+	pod 'PBTutorialManager'
+end

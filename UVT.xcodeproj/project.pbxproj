@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EECF209B442CE884176FB58 /* Pods_UVT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E8A4042E4CDE83EE07C2E8 /* Pods_UVT.framework */; };
 		0FC6AD4C288E0C4D00A49730 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6AD4B288E0C4D00A49730 /* AppDelegate.swift */; };
 		0FC6AD4E288E0C4D00A49730 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6AD4D288E0C4D00A49730 /* SceneDelegate.swift */; };
 		0FC6AD50288E0C4D00A49730 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6AD4F288E0C4D00A49730 /* ViewController.swift */; };
@@ -49,6 +50,9 @@
 		0FC6AD68288E0C5000A49730 /* UVTUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UVTUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FC6AD6C288E0C5000A49730 /* UVTUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVTUITests.swift; sourceTree = "<group>"; };
 		0FC6AD6E288E0C5000A49730 /* UVTUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVTUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6C7E705F62D878BB972FB142 /* Pods-UVT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT.release.xcconfig"; path = "Target Support Files/Pods-UVT/Pods-UVT.release.xcconfig"; sourceTree = "<group>"; };
+		DB5D0F9433A1BBE1E0E82512 /* Pods-UVT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT.debug.xcconfig"; path = "Target Support Files/Pods-UVT/Pods-UVT.debug.xcconfig"; sourceTree = "<group>"; };
+		E8E8A4042E4CDE83EE07C2E8 /* Pods_UVT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UVT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EECF209B442CE884176FB58 /* Pods_UVT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +88,8 @@
 				0FC6AD61288E0C5000A49730 /* UVTTests */,
 				0FC6AD6B288E0C5000A49730 /* UVTUITests */,
 				0FC6AD49288E0C4D00A49730 /* Products */,
+				49AB477ED0F3311C60C5528F /* Pods */,
+				514003FE92B35E033EC6E821 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +134,23 @@
 			path = UVTUITests;
 			sourceTree = "<group>";
 		};
+		49AB477ED0F3311C60C5528F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB5D0F9433A1BBE1E0E82512 /* Pods-UVT.debug.xcconfig */,
+				6C7E705F62D878BB972FB142 /* Pods-UVT.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		514003FE92B35E033EC6E821 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E8E8A4042E4CDE83EE07C2E8 /* Pods_UVT.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,9 +158,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0FC6AD72288E0C5000A49730 /* Build configuration list for PBXNativeTarget "UVT" */;
 			buildPhases = (
+				3C48FB6A0D5196998F1C95BF /* [CP] Check Pods Manifest.lock */,
 				0FC6AD44288E0C4D00A49730 /* Sources */,
 				0FC6AD45288E0C4D00A49730 /* Frameworks */,
 				0FC6AD46288E0C4D00A49730 /* Resources */,
+				570C8188FF1C7FFB82F4F0F1 /* [CP] Embed Pods Frameworks */,
+				0FC6AD7B288E0E6E00A49730 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -252,6 +279,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0FC6AD7B288E0E6E00A49730 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n\n/bin/sh \"${SCRIPT}\" echo `bundle exec pod keys get newrelic_token`\n";
+		};
+		3C48FB6A0D5196998F1C95BF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UVT-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		570C8188FF1C7FFB82F4F0F1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UVT/Pods-UVT-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UVT/Pods-UVT-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UVT/Pods-UVT-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0FC6AD44288E0C4D00A49730 /* Sources */ = {
@@ -432,11 +518,12 @@
 		};
 		0FC6AD73288E0C5000A49730 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB5D0F9433A1BBE1E0E82512 /* Pods-UVT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UVT/Info.plist;
@@ -449,8 +536,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.justinkumpe.apps.UVT;
+				MARKETING_VERSION = 10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.justinkumpe.apps.jkuvt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -460,11 +547,12 @@
 		};
 		0FC6AD74288E0C5000A49730 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C7E705F62D878BB972FB142 /* Pods-UVT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UVT/Info.plist;
@@ -477,8 +565,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.justinkumpe.apps.UVT;
+				MARKETING_VERSION = 10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.justinkumpe.apps.jkuvt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
