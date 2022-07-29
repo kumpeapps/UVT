@@ -2,7 +2,7 @@ name: iOS project Run Tests
 
 on:
   push:
-    branches: [ Development ]
+    branches: [ Development, development ]
 
 concurrency:
   group: build-ios-${{ github.ref }}
@@ -45,10 +45,68 @@ jobs:
     - name: Run tests
       run: bundle exec fastlane test
 
-  TestFlight:
-    if: "contains(github.event.head_commit.message, '#TestFlight')"
+  TestFlight-Alpha:
+    if: "contains(github.event.head_commit.message, '#TestFlight') && !contains(github.event.head_commit.message, '#beta')"
     runs-on: macos-latest
-    environment: Apple TestFlight
+    environment: Apple TestFlight- Alpha
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/cache@v2
+      id: podcache
+      with:
+        path: Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+        restore-keys: |
+                ${{ runner.os }}-pods-
+
+    - uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+
+    - name: Bundle dependencies
+      run: bundle install
+
+    - name: CocoaPods dependencies
+      env:
+        newrelic_token: ${{ secrets.NEWRELIC_TOKEN }}
+      run: bundle exec pod check || bundle exec pod install
+
+    - name: CocoaPods Update
+      if: "contains(github.event.head_commit.message, '#pod update')"
+      run: bundle exec pod update
+
+    - name: Fastlane Match
+      env:
+        FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+        FASTLANE_USER: "jakumpe@justinkumpe.net"
+        MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+        MATCH_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+        MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+      run: bundle exec fastlane matchget
+
+    - name: Upload To TestFlight Alpha
+      if: "!contains(github.event.head_commit.message, '#beta')"
+      env:
+        APPLE_APPSTORE_API_ISSUER_ID: ${{ secrets.APPLE_APPSTORE_API_ISSUER_ID }}
+        APPLE_APP_STORE_API_KEY: ${{ secrets.APPLE_APP_STORE_API_KEY }}
+        APPLE_APP_STORE_API_KEY_ID: ${{ secrets.APPLE_APP_STORE_API_KEY_ID }}
+      run: bundle exec fastlane alpha
+
+    - name: Commit and Push
+      run: git commit ./KKid.xcodeproj ./KKid/Info.plist KKidUITests/Info.plist ./fastlane/ -m "Updated Fastfile" && git push
+
+  TestFlight-Beta:
+    if: "contains(github.event.head_commit.message, '#TestFlight') && contains(github.event.head_commit.message, '#beta')"
+    runs-on: macos-latest
+    environment: 
+      name: Apple TestFlight- Beta
+      url: https://uvt-beta.kumpe.app
 
     steps:
     - uses: actions/checkout@v2
