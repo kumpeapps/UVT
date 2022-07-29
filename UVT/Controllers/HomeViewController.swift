@@ -20,7 +20,7 @@ class HomeViewController: ModulesVC {
         super.viewDidLoad()
         cellBackgroundColor = .systemOrange
         collectionViewBackgroundColor = .systemOrange
-        settingsBundle.alert.title = "Module Not Implemented"
+        settingsBundle.alert.title = "Module Not Implemented!"
         settingsBundle.alert.message = "This module is still under development"
         settingsBundle.alert.theme = .warning
         reachable = ReachabilitySetup()
