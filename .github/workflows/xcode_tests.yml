@@ -99,7 +99,7 @@ jobs:
       run: bundle exec fastlane alpha
 
     - name: Commit and Push
-      run: git commit ./UVT.xcodeproj ./UVT/Info.plist UVTUITests/Info.plist ./fastlane/ -m "Updated Build Number pushed to TestFlight" && git push
+      run: git commit ./UVT.xcodeproj -m "Updated Build Number pushed to TestFlight" && git push
 
   TestFlight-Beta:
     if: "contains(github.event.head_commit.message, '#TestFlight') && contains(github.event.head_commit.message, '#beta')"
@@ -157,4 +157,4 @@ jobs:
       run: bundle exec fastlane beta
 
     - name: Commit and Push
-      run: git commit ./UVT.xcodeproj ./UVT/Info.plist UVTUITests/Info.plist ./fastlane/ -m "Updated Build Version Pushed to TestFlight" && git push
+      run: git commit ./UVT.xcodeproj -m "Updated Build Version Pushed to TestFlight" && git push
