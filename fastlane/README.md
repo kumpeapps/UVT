@@ -53,15 +53,11 @@ Build and upload release version to Apple
 [bundle exec] fastlane ios notifytest
 ```
 
-
-
 ### ios get_metadata
 
 ```sh
 [bundle exec] fastlane ios get_metadata
 ```
-
-
 
 ----
 
