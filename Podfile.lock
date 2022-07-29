@@ -4,20 +4,32 @@ PODS:
   - Alamofire-SwiftyJSON (3.0.0):
     - Alamofire (~> 4.5)
     - SwiftyJSON (~> 4.0.0)
+  - BadgeSwift (8.0.0)
   - CollectionViewCenteredFlowLayout (1.0.1)
   - DeviceKit (4.6.1)
   - FetchedResultsControllerCollectionViewUpdater (0.1.0)
   - Haptico (1.1.1)
   - Keys (1.0.1)
-  - KumpeHelpers (4.0):
+  - Kingfisher (7.3.0)
+  - KumpeHelpers (4.3.3):
     - Alamofire-SwiftyJSON
+    - BadgeSwift
     - CollectionViewCenteredFlowLayout
     - DeviceKit
     - FetchedResultsControllerCollectionViewUpdater
     - Haptico
+    - Kingfisher
     - ReachabilitySwift
     - SwiftMessages
     - Sync
+  - ModulesVC (1.0):
+    - BadgeSwift
+    - CollectionViewCenteredFlowLayout
+    - DeviceKit
+    - FetchedResultsControllerCollectionViewUpdater
+    - Haptico
+    - Kingfisher
+    - SwiftMessages
   - NewRelicAgent (7.3.7)
   - PBTutorialManager (1.1.0):
     - AFCurvedArrowView
@@ -29,8 +41,11 @@ PODS:
   - Sync (6.5.0)
 
 DEPENDENCIES:
+  - BadgeSwift
   - Keys (from `Pods/CocoaPodsKeys`)
+  - Kingfisher
   - KumpeHelpers
+  - ModulesVC (from `https://github.com/kumpeapps/ModulesVC.git`, branch `development`)
   - NewRelicAgent
   - PBTutorialManager
 
@@ -39,10 +54,12 @@ SPEC REPOS:
     - AFCurvedArrowView
     - Alamofire
     - Alamofire-SwiftyJSON
+    - BadgeSwift
     - CollectionViewCenteredFlowLayout
     - DeviceKit
     - FetchedResultsControllerCollectionViewUpdater
     - Haptico
+    - Kingfisher
     - KumpeHelpers
     - NewRelicAgent
     - PBTutorialManager
@@ -54,17 +71,28 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Keys:
     :path: Pods/CocoaPodsKeys
+  ModulesVC:
+    :branch: development
+    :git: https://github.com/kumpeapps/ModulesVC.git
+
+CHECKOUT OPTIONS:
+  ModulesVC:
+    :commit: 0b5ae2c94b2e4d9b02b2e479b97f169328c64594
+    :git: https://github.com/kumpeapps/ModulesVC.git
 
 SPEC CHECKSUMS:
   AFCurvedArrowView: 5fa8fcc1f77f5428ab34d7a1c6696b88c3c20f40
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Alamofire-SwiftyJSON: 2b3649d57dc7bb2880fb8b86f8bb969397666916
+  BadgeSwift: a81547ffde1f462bb5fc02e3fa3fdcbc1b888354
   CollectionViewCenteredFlowLayout: 339b935be4d8578c59e448c8906117a07c657d85
   DeviceKit: 316f28290430467278b8a0d1c895968efa9e16e2
   FetchedResultsControllerCollectionViewUpdater: 10e88db1403d8d6e17a5d323efe1d1fd31dd0e1c
   Haptico: 3ab938425737e2b90939d41e1b23538cdbe1cf44
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
-  KumpeHelpers: 04594e568e664c0d34eaff80b02a927c1f3da751
+  Kingfisher: cdb1189a9223b1bc028816bd47c8b8101a58831c
+  KumpeHelpers: 0bde1014a241a1a7760def550d946b58fb781f93
+  ModulesVC: 0fe0973d53307506c6d19ad5978c2ec67c9367bf
   NewRelicAgent: 13afbb9545e287293cf7514d344be4ebc9413c6e
   PBTutorialManager: 7c2383247c0b0da71cf14438c0a2a737bca51a42
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
@@ -72,6 +100,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Sync: 86bb8aa0ea2f955ea5ac97b7b73129f86591c39e
 
-PODFILE CHECKSUM: 390935b86648e4ea7550d6e453fadd3fc22e040d
+PODFILE CHECKSUM: 11a71bda22a0ea91badb2edd68f11962fcb81c37
 
 COCOAPODS: 1.11.3

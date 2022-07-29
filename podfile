@@ -15,4 +15,7 @@ project 'UVT.xcodeproj'
 	pod 'KumpeHelpers'
 	pod 'NewRelicAgent'
 	pod 'PBTutorialManager'
+	pod 'BadgeSwift'
+	pod 'Kingfisher'
+	pod 'ModulesVC', :git => 'https://github.com/kumpeapps/ModulesVC.git', :branch => 'development'
 end
