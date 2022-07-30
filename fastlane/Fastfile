@@ -43,7 +43,7 @@ platform :ios do
     if is_ci
       add_badge(dark: true)
     end
-    build_app(scheme: "Static IP Trainer", workspace: "Static IP Trainer.xcworkspace")
+    build_app(scheme: "UVT", workspace: "UVT.xcworkspace")
     upload_to_testflight(distribute_external: true, groups: "Public Testers", submit_beta_review: true, changelog: "Bug Fixes and New Features")
   end
 
