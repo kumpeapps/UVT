@@ -25,10 +25,19 @@ class UVTUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testEthernetWiring() throws {
         app.launch()
+        testImageView("RJ45 Wiring Scheme")
+    }
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testCopperColorCode() throws {
+        app.launch()
+        testImageView("Copper Color Code")
+    }
+
+    func testFiberColorCode() throws {
+        app.launch()
+        testImageView("Fiber Color Code")
     }
 
     func testLaunchPerformance() throws {
@@ -39,12 +48,29 @@ class UVTUITests: XCTestCase {
             }
         }
     }
-    
+
     func tapCoordinate(at xCoordinate: Double, and yCoordinate: Double) {
         let normalized = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
         let coordinate = normalized.withOffset(CGVector(dx: xCoordinate, dy: yCoordinate))
         coordinate.tap()
     }
+
+    func testImageView(_ moduleName: String) {
+        let module = app.collectionViews.cells.otherElements.containing(.staticText, identifier: moduleName).element
+        let close = app/*@START_MENU_TOKEN@*/.staticTexts["Close"]/*[[".buttons[\"Close\"].staticTexts[\"Close\"]",".staticTexts[\"Close\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        guard module.waitForExistence(timeout: 10) else {
+            XCTFail("\(moduleName) Button does  not exist")
+            return
+        }
+        module.forceTapElement()
+        sleep(5)
+        guard close.waitForExistence(timeout: 10) else {
+            XCTFail("Close button does not exist")
+            return
+        }
+        close.forceTapElement()
+    }
+
 }
 
 extension XCUIElement {

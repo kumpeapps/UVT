@@ -24,8 +24,8 @@ class StaticIPViewController: UIViewController {
     var buttonPACEIns = UIButton()
 
     // MARK: parameters
-    var ipInfo: IPInfo? = nil
-    var startIP: IPAddress? = nil
+    var ipInfo: IPInfo?
+    var startIP: IPAddress?
     var ipInfoText = ""
     var instructions = ""
 
