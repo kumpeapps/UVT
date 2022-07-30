@@ -12,4 +12,7 @@ struct IPAddress {
     var secondOctet: Int
     var thirdOctet: Int
     var fourthOctet: Int
+    var string: String {
+        return "\(firstOctet).\(secondOctet).\(thirdOctet).\(fourthOctet)"
+    }
 }

@@ -17,6 +17,18 @@ default_platform(:ios)
 
 platform :ios do
 
+  desc "Generate new localized screenshots"
+  lane :screenshots do
+    capture_screenshots(workspace: "UVT.xcworkspace",
+              scheme: "UVTUITests",
+              only_testing: "UVTUITests/UVTTakeScreenshots")
+    frameit
+    sh('find ./screenshots/en-US/ -type f \! -name "*framed*.png" -delete')
+    if !is_ci
+      notification(subtitle: "Finished Screenshots", message: "Fastlane has finished gathering screenshots for UVT", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
+    end
+  end
+
   desc "Build and upload beta version to testflight"
   lane :beta do
     if is_ci
@@ -84,8 +96,14 @@ platform :ios do
 	match(type: "appstore", readonly: is_ci, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], git_url: "https://github.com/kumpeapps/fastlane_certs.git")
   end
 
-  lane :notifytest do
-	get_build_number
+  lane :test do
+    run_tests(workspace: "UVT.xcworkspace",
+            devices: ["iPhone 12 Pro","iPad Pro (12.9-inch) (3rd generation)"],
+            scheme: "UVTUITests",
+            only_testing: "UVTUITests/UVTUITests")
+    if !is_ci
+      notification(subtitle: "UVT Tests Complete", message: "UVT testing complete", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
+    end
   end
 
   lane :get_metadata do

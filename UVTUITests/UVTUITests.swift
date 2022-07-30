@@ -8,6 +8,9 @@
 import XCTest
 
 class UVTUITests: XCTestCase {
+    
+    let app = XCUIApplication()
+    let elementsQuery = XCUIApplication().scrollViews.otherElements
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -23,8 +26,6 @@ class UVTUITests: XCTestCase {
     }
 
     func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
         app.launch()
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -37,5 +38,68 @@ class UVTUITests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
+    }
+    
+    func tapCoordinate(at xCoordinate: Double, and yCoordinate: Double) {
+        let normalized = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        let coordinate = normalized.withOffset(CGVector(dx: xCoordinate, dy: yCoordinate))
+        coordinate.tap()
+    }
+}
+
+extension XCUIElement {
+    // The following is a workaround for inputting text in the
+    // simulator when the keyboard is hidden
+    func setText(text: String, application: XCUIApplication) {
+        UIPasteboard.general.string = text
+        doubleTap()
+        if application.menuItems["Paste"].waitForExistence(timeout: 10) {
+            application.menuItems["Paste"].tap()
+        }
+    }
+
+    func forceTapElement() {
+        if self.isHittable {
+            self.tap()
+        } else {
+            let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx:0.0, dy:0.0))
+            coordinate.tap()
+        }
+    }
+
+    func pasteTextFieldText(app:XCUIApplication, element:XCUIElement, value:String, clearText:Bool) {
+        // Get the password into the pasteboard buffer
+        UIPasteboard.general.string = value
+
+        // Bring up the popup menu on the password field
+        element.tap()
+
+        if clearText {
+            element.buttons["Clear text"].tap()
+        }
+
+        element.doubleTap()
+
+        // Tap the Paste button to input the password
+        if app.menuItems["Paste"].waitForExistence(timeout: 5) {
+            app.menuItems["Paste"].tap()
+        } else {
+            element.doubleTap()
+            if app.menuItems["Paste"].waitForExistence(timeout: 10) {
+                app.menuItems["Paste"].tap()
+            }
+        }
+    }
+
+}
+
+extension XCUIApplication {
+    func setSeenTutorial(_ seenTutorial: Bool = true) {
+        guard seenTutorial else {
+            return
+        }
+        launchArguments += ["-lastBuildHome", "999999"]
+        launchArguments += ["-lastBuildImages", "999999"]
+        launchArguments += ["-lastBuildStaticIP", "999999"]
     }
 }
