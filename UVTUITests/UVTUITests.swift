@@ -8,7 +8,7 @@
 import XCTest
 
 class UVTUITests: XCTestCase {
-    
+
     let app = XCUIApplication()
     let elementsQuery = XCUIApplication().scrollViews.otherElements
 
@@ -67,7 +67,7 @@ extension XCUIElement {
         }
     }
 
-    func pasteTextFieldText(app:XCUIApplication, element:XCUIElement, value:String, clearText:Bool) {
+    func pasteTextFieldText(app: XCUIApplication, element: XCUIElement, value: String, clearText: Bool) {
         // Get the password into the pasteboard buffer
         UIPasteboard.general.string = value
 

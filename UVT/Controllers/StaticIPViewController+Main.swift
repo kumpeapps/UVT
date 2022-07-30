@@ -110,7 +110,7 @@ extension StaticIPViewController {
 
     // MARK: pressedSubmit
     @objc func pressedSubmit(sender: UIButton!) {
-        let blockSizes = [8,16,32,64]
+        let blockSizes = [8, 16, 32, 64]
         guard let startIP = fieldStartIP.text, startIP != "" else {
             KumpeHelpers.ShowAlert.centerView(theme: .error, title: "Start IP Required", message: "Please enter start IP address", seconds: 5, invokeHaptics: true)
             return
