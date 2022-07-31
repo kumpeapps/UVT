@@ -72,6 +72,7 @@ extension StaticIPViewController {
                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
             )
             field.keyboardType = .decimalPad
+            field.clearButtonMode = .always
             field.borderStyle = .roundedRect
             field.textAlignment = .center
             field.backgroundColor = .white
@@ -88,6 +89,7 @@ extension StaticIPViewController {
             )
             field.keyboardType = .asciiCapableNumberPad
             field.borderStyle = .roundedRect
+            field.clearButtonMode = .always
             field.textAlignment = .center
             field.backgroundColor = .white
             field.textColor = .black

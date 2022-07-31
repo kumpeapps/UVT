@@ -40,6 +40,34 @@ class UVTUITests: XCTestCase {
         testImageView("Fiber Color Code")
     }
 
+    func testStaticIP() throws {
+        let module = app.collectionViews.cells.otherElements.containing(.staticText, identifier: "UV Static IP Instructions").element
+        let submitButton = app/*@START_MENU_TOKEN@*/.buttons["Submit"]/*[[".scrollViews.buttons[\"Submit\"]",".buttons[\"Submit\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["Submit"]
+        let blockSize = app/*@START_MENU_TOKEN@*/.textFields["Block Size"]/*[[".scrollViews.textFields[\"Block Size\"]",".textFields[\"Block Size\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        let ipAddressField = app/*@START_MENU_TOKEN@*/.textFields["Start IP Address"]/*[[".scrollViews.textFields[\"Start IP Address\"]",".textFields[\"Start IP Address\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        module.waitTap(application: app, wait: 5, canFail: true)
+        if ipAddressField.waitForExistence(timeout: 5) {
+            ipAddressField.pasteTextFieldText(app: app, element: ipAddressField, value: "127.0.0.1", clearText: false)
+        }
+        if blockSize.waitForExistence(timeout: 5) {
+            blockSize.pasteTextFieldText(app: app, element: blockSize, value: "8", clearText: false)
+        }
+        submitButton.waitTap(application: app, wait: 5, canFail: true)
+        ipAddressField.testExists(app: app, wait: 7, sleepInterval: 7)
+        if ipAddressField.waitForExistence(timeout: 5) {
+            ipAddressField.pasteTextFieldText(app: app, element: ipAddressField, value: "68.1.229.1", clearText: false)
+        }
+        if blockSize.waitForExistence(timeout: 5) {
+            blockSize.pasteTextFieldText(app: app, element: blockSize, value: "9", clearText: false)
+        }
+        submitButton.waitTap(application: app, wait: 5, canFail: true)
+        ipAddressField.testExists(app: app, wait: 7, sleepInterval: 7)
+        if blockSize.waitForExistence(timeout: 5) {
+            blockSize.pasteTextFieldText(app: app, element: blockSize, value: "8", clearText: false)
+        }
+        submitButton.waitTap(application: app, wait: 5, canFail: true)
+    }
+
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
             // This measures how long it takes to launch your application.
@@ -84,12 +112,28 @@ extension XCUIElement {
         }
     }
 
+    func waitTap(application: XCUIApplication, wait: TimeInterval, canFail: Bool) {
+        if self.waitForExistence(timeout: wait) {
+            self.forceTapElement()
+        } else if canFail {
+            XCTFail()
+        }
+    }
+
     func forceTapElement() {
         if self.isHittable {
             self.tap()
         } else {
             let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx:0.0, dy:0.0))
             coordinate.tap()
+        }
+    }
+
+    func testExists(app: XCUIApplication, wait: TimeInterval, sleepInterval: UInt32 = 0) {
+        sleep(sleepInterval)
+        guard self.waitForExistence(timeout: wait) else {
+            XCTFail()
+            return
         }
     }
 
