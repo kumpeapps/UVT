@@ -66,7 +66,9 @@
 		0FED6AFA289208DF004F8630 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		0FED6AFC289217EB004F8630 /* IPAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAddress.swift; sourceTree = "<group>"; };
 		0FED6AFE2892185F004F8630 /* IPInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPInfo.swift; sourceTree = "<group>"; };
+		31EB0896EC61036499EBAF69 /* Pods-UVT-UVTTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT-UVTTests.release.xcconfig"; path = "Target Support Files/Pods-UVT-UVTTests/Pods-UVT-UVTTests.release.xcconfig"; sourceTree = "<group>"; };
 		6C7E705F62D878BB972FB142 /* Pods-UVT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT.release.xcconfig"; path = "Target Support Files/Pods-UVT/Pods-UVT.release.xcconfig"; sourceTree = "<group>"; };
+		A6B78EC6DFAE389EF3B2E71F /* Pods-UVT-UVTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT-UVTTests.debug.xcconfig"; path = "Target Support Files/Pods-UVT-UVTTests/Pods-UVT-UVTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DB5D0F9433A1BBE1E0E82512 /* Pods-UVT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT.debug.xcconfig"; path = "Target Support Files/Pods-UVT/Pods-UVT.debug.xcconfig"; sourceTree = "<group>"; };
 		E8E8A4042E4CDE83EE07C2E8 /* Pods_UVT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UVT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -195,6 +197,8 @@
 			children = (
 				DB5D0F9433A1BBE1E0E82512 /* Pods-UVT.debug.xcconfig */,
 				6C7E705F62D878BB972FB142 /* Pods-UVT.release.xcconfig */,
+				A6B78EC6DFAE389EF3B2E71F /* Pods-UVT-UVTTests.debug.xcconfig */,
+				31EB0896EC61036499EBAF69 /* Pods-UVT-UVTTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";

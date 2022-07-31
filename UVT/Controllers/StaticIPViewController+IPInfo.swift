@@ -36,11 +36,11 @@ extension StaticIPViewController {
             text.text = ipInfoText
             return text
         }()
-        view.addSubview(self.labelText)
-        labelText.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 20).isActive = true
-        labelText.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        labelText.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor).isActive = true
-        labelText.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor).isActive = true
+        scrollingView.addSubview(self.labelText)
+        labelText.topAnchor.constraint(equalTo: scrollingView.topAnchor).isActive = true
+        labelText.centerXAnchor.constraint(equalTo: scrollingView.centerXAnchor).isActive = true
+        labelText.leadingAnchor.constraint(greaterThanOrEqualTo: scrollingView.leadingAnchor).isActive = true
+        labelText.trailingAnchor.constraint(lessThanOrEqualTo: scrollingView.trailingAnchor).isActive = true
     }
 
     // MARK: shareInfo
@@ -68,9 +68,9 @@ extension StaticIPViewController {
             button.tag = 1
             return button
         }()
-        view.addSubview(buttonARRISIns)
+        scrollingView.addSubview(buttonARRISIns)
         buttonARRISIns.topAnchor.constraint(equalTo: labelText.bottomAnchor, constant: 40).isActive = true
-        buttonARRISIns.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        buttonARRISIns.centerXAnchor.constraint(equalTo: scrollingView.centerXAnchor).isActive = true
         buttonARRISIns.widthAnchor.constraint(equalToConstant: 200).isActive = true
     }
 
@@ -90,9 +90,10 @@ extension StaticIPViewController {
             button.tag = 1
             return button
         }()
-        view.addSubview(buttonPACEIns)
+        scrollingView.addSubview(buttonPACEIns)
         buttonPACEIns.topAnchor.constraint(equalTo: buttonARRISIns.bottomAnchor, constant: 15).isActive = true
-        buttonPACEIns.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        buttonPACEIns.bottomAnchor.constraint(equalTo: scrollingView.bottomAnchor).isActive = true
+        buttonPACEIns.centerXAnchor.constraint(equalTo: scrollingView.centerXAnchor).isActive = true
         buttonPACEIns.widthAnchor.constraint(equalToConstant: 200).isActive = true
     }
 

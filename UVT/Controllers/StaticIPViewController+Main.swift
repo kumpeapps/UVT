@@ -7,13 +7,31 @@
 
 import UIKit
 import KumpeHelpers
+import SwiftUI
 
 extension StaticIPViewController {
     // MARK: buildMain
     func buildMain(_ build: Bool = true) {
         buildTitle()
+        buildScrollView()
         buildIPFields(build)
         buildSubmitButton(build)
+    }
+
+    // MARK: buildScrollView
+    func buildScrollView() {
+        scrollingView = {
+            let scrollView = UIScrollView()
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.isScrollEnabled = true
+            scrollView.showsVerticalScrollIndicator = true
+            return scrollView
+        }()
+        view.addSubview(scrollingView)
+        scrollingView.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 15).isActive = true
+        scrollingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        scrollingView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        scrollingView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
 
     // MARK: buildTitle
@@ -76,13 +94,13 @@ extension StaticIPViewController {
             field.tag = 1
             return field
         }()
-        view.addSubview(fieldStartIP)
-        fieldStartIP.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 15).isActive = true
-        fieldStartIP.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        scrollingView.addSubview(fieldStartIP)
+        fieldStartIP.topAnchor.constraint(equalTo: scrollingView.topAnchor, constant: 15).isActive = true
+        fieldStartIP.centerXAnchor.constraint(equalTo: scrollingView.centerXAnchor).isActive = true
         fieldStartIP.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        view.addSubview(fieldBlockSize)
+        scrollingView.addSubview(fieldBlockSize)
         fieldBlockSize.topAnchor.constraint(equalTo: fieldStartIP.bottomAnchor, constant: 5).isActive = true
-        fieldBlockSize.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        fieldBlockSize.centerXAnchor.constraint(equalTo: scrollingView.centerXAnchor).isActive = true
         fieldBlockSize.widthAnchor.constraint(equalToConstant: 100).isActive = true
     }
 
@@ -102,7 +120,7 @@ extension StaticIPViewController {
             button.tag = 1
             return button
         }()
-        view.addSubview(buttonSubmit)
+        scrollingView.addSubview(buttonSubmit)
         buttonSubmit.topAnchor.constraint(equalTo: fieldBlockSize.bottomAnchor, constant: 40).isActive = true
         buttonSubmit.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         buttonSubmit.widthAnchor.constraint(equalToConstant: 100).isActive = true

@@ -8,12 +8,19 @@
 import UIKit
 import KumpeHelpers
 import ModulesVC
+import WhatsNew
 
 class HomeViewController: ModulesVC {
 
     // MARK: Parameters
     var settingsBundle = KModuleSettings()
     var reachable: ReachabilitySetup!
+
+    // MARK: WhatsNew
+    let whatsNew = WhatsNewViewController(items: [
+        WhatsNewItem.text(title: "Re-Design", subtitle: "Complete UI Re-Design"),
+        WhatsNewItem.text(title: "Share Static IP Instrutions", subtitle: "You can now share Static IP info and/or instructions."),
+    ])
 
     // MARK: viewDidLoad
     override func viewDidLoad() {
@@ -35,6 +42,12 @@ class HomeViewController: ModulesVC {
         let staticIPInstructions = buildModule(title: "UV Static IP Instructions", action: "[segue]segueStaticIP", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.ipv4.urlString, isEnabled: true, watermark: UIImage(named: "icons8-disabled"), settings: settingsBundle)
         modules = [ethernetWiringScheme, copperColorCode, fiberColorCode, staticIPInstructions]
         setupCollectionView()
+    }
+
+    // MARK: viewDidAppear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        whatsNew.presentIfNeeded(on: self)
     }
 
     // MARK: prepare for segue

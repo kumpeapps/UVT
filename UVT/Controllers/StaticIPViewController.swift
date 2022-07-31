@@ -23,6 +23,9 @@ class StaticIPViewController: UIViewController {
     var buttonARRISIns = UIButton()
     var buttonPACEIns = UIButton()
 
+    // MARK: views
+    var scrollingView = UIScrollView()
+
     // MARK: parameters
     var ipInfo: IPInfo?
     var startIP: IPAddress?

@@ -39,6 +39,7 @@ PODS:
   - SwiftMessages/App (9.0.6)
   - SwiftyJSON (4.0.0)
   - Sync (6.5.0)
+  - WhatsNew (0.4.6)
 
 DEPENDENCIES:
   - BadgeSwift
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - ModulesVC (from `https://github.com/kumpeapps/ModulesVC.git`, branch `development`)
   - NewRelicAgent
   - PBTutorialManager
+  - WhatsNew
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -67,6 +69,7 @@ SPEC REPOS:
     - SwiftMessages
     - SwiftyJSON
     - Sync
+    - WhatsNew
 
 EXTERNAL SOURCES:
   Keys:
@@ -99,7 +102,8 @@ SPEC CHECKSUMS:
   SwiftMessages: f0c7ef4705a570ad6c5e208b611f4333e660ed92
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Sync: 86bb8aa0ea2f955ea5ac97b7b73129f86591c39e
+  WhatsNew: d66a52b294e90d5bc133877e270ea7ce0b945003
 
-PODFILE CHECKSUM: 11a71bda22a0ea91badb2edd68f11962fcb81c37
+PODFILE CHECKSUM: 1b2f5954a0405442e335478c29f3c6acf3a94fd3
 
 COCOAPODS: 1.11.3
