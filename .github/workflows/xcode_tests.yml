@@ -99,8 +99,8 @@ jobs:
       run: bundle exec fastlane alpha
 
     - name: Commit and Push
-        with:
-          github_token: ${{ secrets.PERSONAL_GITHUB_TOKEN}}
+      env:
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN}}
       run: git commit ./UVT.xcodeproj -m "Updated Build Number pushed to TestFlight" && git push
 
   TestFlight-Beta:
@@ -159,6 +159,6 @@ jobs:
       run: bundle exec fastlane beta
 
     - name: Commit and Push
-        with:
-          github_token: ${{ secrets.PERSONAL_GITHUB_TOKEN}}
+      env:
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN}}
       run: git commit ./UVT.xcodeproj -m "Updated Build Version Pushed to TestFlight" && git push
