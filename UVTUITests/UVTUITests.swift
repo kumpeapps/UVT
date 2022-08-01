@@ -58,7 +58,7 @@ class UVTUITests: XCTestCase {
             blockSize.pasteTextFieldText(app: app, element: blockSize, value: "8", clearText: false)
         }
         submitButton.waitTap(application: app, wait: 5, canFail: true)
-        ipAddressField.testExists(app: app, wait: 7, sleepInterval: 7)
+        ipAddressField.testExists(app: app, wait: 7, sleepInterval: 9)
         if ipAddressField.waitForExistence(timeout: 5) {
             ipAddressField.pasteTextFieldText(app: app, element: ipAddressField, value: "68.1.229.1", clearText: false)
         }
@@ -151,7 +151,6 @@ extension XCUIElement {
         // Get the password into the pasteboard buffer
         UIPasteboard.general.string = value
 
-        // Bring up the popup menu on the password field
         element.tap()
 
         if clearText {

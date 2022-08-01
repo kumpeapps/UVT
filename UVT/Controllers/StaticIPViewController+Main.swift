@@ -76,6 +76,7 @@ extension StaticIPViewController {
             field.textAlignment = .center
             field.backgroundColor = .white
             field.textColor = .black
+            field.clearsOnInsertion = true
             field.tag = 1
             return field
         }()
@@ -91,6 +92,7 @@ extension StaticIPViewController {
             field.textAlignment = .center
             field.backgroundColor = .white
             field.textColor = .black
+            field.clearsOnInsertion = true
             field.tag = 1
             return field
         }()
