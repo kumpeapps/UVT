@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import UVT
 
 class UVTUITests: XCTestCase {
 
@@ -16,6 +17,7 @@ class UVTUITests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         // In UI tests it is usually best to stop immediately when a failure occurs.
         app.launch()
+        XCUIDevice.shared.orientation = .portrait
         continueAfterFailure = false
         let continueButton = XCUIApplication().buttons["Continue"]
         if continueButton.waitForExistence(timeout: 5) {
@@ -45,6 +47,9 @@ class UVTUITests: XCTestCase {
         let submitButton = app/*@START_MENU_TOKEN@*/.buttons["Submit"]/*[[".scrollViews.buttons[\"Submit\"]",".buttons[\"Submit\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["Submit"]
         let blockSize = app/*@START_MENU_TOKEN@*/.textFields["Block Size"]/*[[".scrollViews.textFields[\"Block Size\"]",".textFields[\"Block Size\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         let ipAddressField = app/*@START_MENU_TOKEN@*/.textFields["Start IP Address"]/*[[".scrollViews.textFields[\"Start IP Address\"]",".textFields[\"Start IP Address\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        let aarisButton = app/*@START_MENU_TOKEN@*/.buttons["AARIS RG Instructions"]/*[[".scrollViews.buttons[\"AARIS RG Instructions\"]",".buttons[\"AARIS RG Instructions\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["AARIS RG Instructions"]
+        let paceButton = app/*@START_MENU_TOKEN@*/.buttons["PACE RG Instructions"]/*[[".scrollViews.buttons[\"PACE RG Instructions\"]",".buttons[\"PACE RG Instructions\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["PACE RG Instructions"]
+        let shareButton = app.navigationBars["UVT.StaticIPView"].buttons["Share"]
         module.waitTap(application: app, wait: 5, canFail: true)
         if ipAddressField.waitForExistence(timeout: 5) {
             ipAddressField.pasteTextFieldText(app: app, element: ipAddressField, value: "127.0.0.1", clearText: false)
@@ -66,6 +71,11 @@ class UVTUITests: XCTestCase {
             blockSize.pasteTextFieldText(app: app, element: blockSize, value: "8", clearText: false)
         }
         submitButton.waitTap(application: app, wait: 5, canFail: true)
+        aarisButton.testExists(app: app, wait: 5)
+        paceButton.testExists(app: app, wait: 5)
+        paceButton.waitTap(application: app, wait: 5, canFail: true)
+        aarisButton.waitTap(application: app, wait: 5, canFail: true)
+        shareButton.waitTap(application: app, wait: 5, canFail: true)
     }
 
     func testLaunchPerformance() throws {
@@ -116,7 +126,7 @@ extension XCUIElement {
         if self.waitForExistence(timeout: wait) {
             self.forceTapElement()
         } else if canFail {
-            XCTFail()
+            XCTFail("button \(self.label) does not exist so can not be tapped")
         }
     }
 
@@ -132,7 +142,7 @@ extension XCUIElement {
     func testExists(app: XCUIApplication, wait: TimeInterval, sleepInterval: UInt32 = 0) {
         sleep(sleepInterval)
         guard self.waitForExistence(timeout: wait) else {
-            XCTFail()
+            XCTFail("\(self.label) does not exist")
             return
         }
     }
