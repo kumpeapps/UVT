@@ -11,11 +11,23 @@
 #
 
 # Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+update_fastlane
 
 default_platform(:ios)
 
 platform :ios do
+
+  desc "Generate new localized screenshots"
+  lane :screenshots do
+    capture_screenshots(workspace: "UVT.xcworkspace",
+              scheme: "UVTUITests",
+              only_testing: "UVTUITests/UVTTakeScreenshots")
+    frameit
+    sh('find ./screenshots/en-US/ -type f \! -name "*framed*.png" -delete')
+    if !is_ci
+      notification(subtitle: "Finished Screenshots", message: "Fastlane has finished gathering screenshots for UVT", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
+    end
+  end
 
   desc "Build and upload beta version to testflight"
   lane :beta do
@@ -31,7 +43,7 @@ platform :ios do
     if is_ci
       add_badge(dark: true)
     end
-    build_app(scheme: "Static IP Trainer", workspace: "Static IP Trainer.xcworkspace")
+    build_app(scheme: "UVT", workspace: "UVT.xcworkspace")
     upload_to_testflight(distribute_external: true, groups: "Public Testers", submit_beta_review: true, changelog: "Bug Fixes and New Features")
   end
 
@@ -73,7 +85,7 @@ platform :ios do
       overwrite_screenshots: true
   	)
   	if !is_ci
-  		notification(subtitle: "Finished Uploading", message: "UVT release build upload complete", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
+  		notification(subtitle: "Finished Uploading ", message: "UVT release build upload complete", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
   	end
   end
 
@@ -84,8 +96,14 @@ platform :ios do
 	match(type: "appstore", readonly: is_ci, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], git_url: "https://github.com/kumpeapps/fastlane_certs.git")
   end
 
-  lane :notifytest do
-	get_build_number
+  lane :test do
+    run_tests(workspace: "UVT.xcworkspace",
+            devices: ["iPhone 12 Pro","iPad Pro (9.7-inch)"],
+            scheme: "UVTUITests",
+            only_testing: "UVTUITests/UVTUITests")
+    if !is_ci
+      notification(subtitle: "UVT Tests Complete", message: "UVT testing complete", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
+    end
   end
 
   lane :get_metadata do

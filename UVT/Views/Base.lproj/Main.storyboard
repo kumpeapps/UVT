@@ -52,9 +52,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="ci5-54-qJi"/>
                     <connections>
-                        <segue destination="7VH-Hh-1vi" kind="presentation" identifier="segueEthernet" modalTransitionStyle="coverVertical" id="f7A-R1-YLr"/>
-                        <segue destination="7VH-Hh-1vi" kind="presentation" identifier="segueCopperColors" modalTransitionStyle="coverVertical" id="eEo-8o-X3o"/>
-                        <segue destination="7VH-Hh-1vi" kind="presentation" identifier="segueFiberColors" modalTransitionStyle="coverVertical" id="IWT-4u-8yL"/>
+                        <segue destination="7VH-Hh-1vi" kind="show" identifier="segueEthernet" id="f7A-R1-YLr"/>
+                        <segue destination="7VH-Hh-1vi" kind="show" identifier="segueCopperColors" id="eEo-8o-X3o"/>
+                        <segue destination="7VH-Hh-1vi" kind="show" identifier="segueFiberColors" id="IWT-4u-8yL"/>
                         <segue destination="ELj-Ww-twR" kind="show" identifier="segueStaticIP" id="lLQ-RU-Zfp"/>
                     </connections>
                 </viewController>
@@ -67,11 +67,12 @@
             <objects>
                 <viewController id="7VH-Hh-1vi" customClass="ImageViewController" customModule="UVT" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pPa-CA-CjM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="dzd-8e-uVN"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="dd9-fW-x2C"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qmj-9y-Nps" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

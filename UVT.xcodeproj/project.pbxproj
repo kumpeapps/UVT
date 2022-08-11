@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		0EECF209B442CE884176FB58 /* Pods_UVT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E8A4042E4CDE83EE07C2E8 /* Pods_UVT.framework */; };
+		0F2C52FB2894A87C00B37052 /* StaticIPViewController+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C52FA2894A87C00B37052 /* StaticIPViewController+Main.swift */; };
+		0F2C52FD2894B87400B37052 /* StaticIPViewController+IPInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C52FC2894B87400B37052 /* StaticIPViewController+IPInfo.swift */; };
+		0F2C52FF2894C40D00B37052 /* StaticIPViewController+Ins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C52FE2894C40D00B37052 /* StaticIPViewController+Ins.swift */; };
+		0F7E3B20289700700059DCBE /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7E3B1F289700700059DCBE /* SnapshotHelper.swift */; };
+		0F7E3B22289700CB0059DCBE /* UVTTakeScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7E3B21289700CB0059DCBE /* UVTTakeScreenshots.swift */; };
 		0FC6AD4C288E0C4D00A49730 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6AD4B288E0C4D00A49730 /* AppDelegate.swift */; };
 		0FC6AD4E288E0C4D00A49730 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6AD4D288E0C4D00A49730 /* SceneDelegate.swift */; };
 		0FC6AD50288E0C4D00A49730 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6AD4F288E0C4D00A49730 /* HomeViewController.swift */; };
 		0FC6AD53288E0C4D00A49730 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6AD51288E0C4D00A49730 /* Main.storyboard */; };
 		0FC6AD55288E0C5000A49730 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6AD54288E0C5000A49730 /* Assets.xcassets */; };
 		0FC6AD58288E0C5000A49730 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6AD56288E0C5000A49730 /* LaunchScreen.storyboard */; };
-		0FC6AD63288E0C5000A49730 /* UVTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6AD62288E0C5000A49730 /* UVTTests.swift */; };
 		0FC6AD6D288E0C5000A49730 /* UVTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6AD6C288E0C5000A49730 /* UVTUITests.swift */; };
 		0FC6AD6F288E0C5000A49730 /* UVTUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6AD6E288E0C5000A49730 /* UVTUITestsLaunchTests.swift */; };
 		0FE22AEC28935BC800C4D867 /* StaticIPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE22AEB28935BC800C4D867 /* StaticIPViewController.swift */; };
 		0FED6AF9289201E0004F8630 /* Icons8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED6AF8289201E0004F8630 /* Icons8.swift */; };
 		0FED6AFB289208DF004F8630 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED6AFA289208DF004F8630 /* ImageViewController.swift */; };
 		0FED6AFD289217EB004F8630 /* IPAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED6AFC289217EB004F8630 /* IPAddress.swift */; };
-		0FED6AFF2892185F004F8630 /* IPBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED6AFE2892185F004F8630 /* IPBlock.swift */; };
+		0FED6AFF2892185F004F8630 /* IPInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FED6AFE2892185F004F8630 /* IPInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F2C52FA2894A87C00B37052 /* StaticIPViewController+Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StaticIPViewController+Main.swift"; sourceTree = "<group>"; };
+		0F2C52FC2894B87400B37052 /* StaticIPViewController+IPInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StaticIPViewController+IPInfo.swift"; sourceTree = "<group>"; };
+		0F2C52FE2894C40D00B37052 /* StaticIPViewController+Ins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StaticIPViewController+Ins.swift"; sourceTree = "<group>"; };
+		0F7E3B1F289700700059DCBE /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		0F7E3B21289700CB0059DCBE /* UVTTakeScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVTTakeScreenshots.swift; sourceTree = "<group>"; };
 		0FC6AD48288E0C4D00A49730 /* UVT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UVT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FC6AD4B288E0C4D00A49730 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FC6AD4D288E0C4D00A49730 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,7 +60,6 @@
 		0FC6AD57288E0C5000A49730 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0FC6AD59288E0C5000A49730 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FC6AD5E288E0C5000A49730 /* UVTTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UVTTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0FC6AD62288E0C5000A49730 /* UVTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVTTests.swift; sourceTree = "<group>"; };
 		0FC6AD68288E0C5000A49730 /* UVTUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UVTUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FC6AD6C288E0C5000A49730 /* UVTUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVTUITests.swift; sourceTree = "<group>"; };
 		0FC6AD6E288E0C5000A49730 /* UVTUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVTUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -59,8 +67,10 @@
 		0FED6AF8289201E0004F8630 /* Icons8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons8.swift; sourceTree = "<group>"; };
 		0FED6AFA289208DF004F8630 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		0FED6AFC289217EB004F8630 /* IPAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAddress.swift; sourceTree = "<group>"; };
-		0FED6AFE2892185F004F8630 /* IPBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPBlock.swift; sourceTree = "<group>"; };
+		0FED6AFE2892185F004F8630 /* IPInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPInfo.swift; sourceTree = "<group>"; };
+		31EB0896EC61036499EBAF69 /* Pods-UVT-UVTTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT-UVTTests.release.xcconfig"; path = "Target Support Files/Pods-UVT-UVTTests/Pods-UVT-UVTTests.release.xcconfig"; sourceTree = "<group>"; };
 		6C7E705F62D878BB972FB142 /* Pods-UVT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT.release.xcconfig"; path = "Target Support Files/Pods-UVT/Pods-UVT.release.xcconfig"; sourceTree = "<group>"; };
+		A6B78EC6DFAE389EF3B2E71F /* Pods-UVT-UVTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT-UVTTests.debug.xcconfig"; path = "Target Support Files/Pods-UVT-UVTTests/Pods-UVT-UVTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DB5D0F9433A1BBE1E0E82512 /* Pods-UVT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UVT.debug.xcconfig"; path = "Target Support Files/Pods-UVT/Pods-UVT.debug.xcconfig"; sourceTree = "<group>"; };
 		E8E8A4042E4CDE83EE07C2E8 /* Pods_UVT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UVT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -95,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				0FC6AD4A288E0C4D00A49730 /* UVT */,
-				0FC6AD61288E0C5000A49730 /* UVTTests */,
 				0FC6AD6B288E0C5000A49730 /* UVTUITests */,
 				0FC6AD49288E0C4D00A49730 /* Products */,
 				49AB477ED0F3311C60C5528F /* Pods */,
@@ -125,19 +134,13 @@
 			path = UVT;
 			sourceTree = "<group>";
 		};
-		0FC6AD61288E0C5000A49730 /* UVTTests */ = {
-			isa = PBXGroup;
-			children = (
-				0FC6AD62288E0C5000A49730 /* UVTTests.swift */,
-			);
-			path = UVTTests;
-			sourceTree = "<group>";
-		};
 		0FC6AD6B288E0C5000A49730 /* UVTUITests */ = {
 			isa = PBXGroup;
 			children = (
 				0FC6AD6C288E0C5000A49730 /* UVTUITests.swift */,
 				0FC6AD6E288E0C5000A49730 /* UVTUITestsLaunchTests.swift */,
+				0F7E3B1F289700700059DCBE /* SnapshotHelper.swift */,
+				0F7E3B21289700CB0059DCBE /* UVTTakeScreenshots.swift */,
 			);
 			path = UVTUITests;
 			sourceTree = "<group>";
@@ -167,6 +170,9 @@
 				0FC6AD4F288E0C4D00A49730 /* HomeViewController.swift */,
 				0FED6AFA289208DF004F8630 /* ImageViewController.swift */,
 				0FE22AEB28935BC800C4D867 /* StaticIPViewController.swift */,
+				0F2C52FA2894A87C00B37052 /* StaticIPViewController+Main.swift */,
+				0F2C52FC2894B87400B37052 /* StaticIPViewController+IPInfo.swift */,
+				0F2C52FE2894C40D00B37052 /* StaticIPViewController+Ins.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -176,7 +182,7 @@
 			children = (
 				0FED6AF8289201E0004F8630 /* Icons8.swift */,
 				0FED6AFC289217EB004F8630 /* IPAddress.swift */,
-				0FED6AFE2892185F004F8630 /* IPBlock.swift */,
+				0FED6AFE2892185F004F8630 /* IPInfo.swift */,
 			);
 			path = "Structs and Enums";
 			sourceTree = "<group>";
@@ -186,6 +192,8 @@
 			children = (
 				DB5D0F9433A1BBE1E0E82512 /* Pods-UVT.debug.xcconfig */,
 				6C7E705F62D878BB972FB142 /* Pods-UVT.release.xcconfig */,
+				A6B78EC6DFAE389EF3B2E71F /* Pods-UVT-UVTTests.debug.xcconfig */,
+				31EB0896EC61036499EBAF69 /* Pods-UVT-UVTTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -393,10 +401,13 @@
 			files = (
 				0FC6AD50288E0C4D00A49730 /* HomeViewController.swift in Sources */,
 				0FC6AD4C288E0C4D00A49730 /* AppDelegate.swift in Sources */,
+				0F2C52FB2894A87C00B37052 /* StaticIPViewController+Main.swift in Sources */,
 				0FED6AFB289208DF004F8630 /* ImageViewController.swift in Sources */,
+				0F2C52FD2894B87400B37052 /* StaticIPViewController+IPInfo.swift in Sources */,
 				0FC6AD4E288E0C4D00A49730 /* SceneDelegate.swift in Sources */,
-				0FED6AFF2892185F004F8630 /* IPBlock.swift in Sources */,
+				0FED6AFF2892185F004F8630 /* IPInfo.swift in Sources */,
 				0FED6AF9289201E0004F8630 /* Icons8.swift in Sources */,
+				0F2C52FF2894C40D00B37052 /* StaticIPViewController+Ins.swift in Sources */,
 				0FED6AFD289217EB004F8630 /* IPAddress.swift in Sources */,
 				0FE22AEC28935BC800C4D867 /* StaticIPViewController.swift in Sources */,
 			);
@@ -406,7 +417,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FC6AD63288E0C5000A49730 /* UVTTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,8 +424,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F7E3B22289700CB0059DCBE /* UVTTakeScreenshots.swift in Sources */,
 				0FC6AD6F288E0C5000A49730 /* UVTUITestsLaunchTests.swift in Sources */,
 				0FC6AD6D288E0C5000A49730 /* UVTUITests.swift in Sources */,
+				0F7E3B20289700700059DCBE /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +588,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UVT/Info.plist;
@@ -585,6 +597,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -607,7 +620,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UVT/Info.plist;
@@ -616,6 +629,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -636,7 +650,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
@@ -656,7 +670,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
@@ -675,7 +689,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -693,7 +707,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;

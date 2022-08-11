@@ -24,19 +24,9 @@ class ImageViewController: UIViewController {
         return imageView
     }()
 
-    // MARK: Buttons
-    let closeButton: UIButton = {
-        let closeButton = UIButton()
-        closeButton.setTitle("Close", for: .normal)
-        closeButton.addTarget(self, action: #selector(pressedClose(sender:)), for: .touchUpInside)
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        return closeButton
-    }()
-
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        buildCloseButton()
         buildImageView()
     }
 
@@ -57,24 +47,24 @@ class ImageViewController: UIViewController {
     }
 
     // MARK: buildImageView
-    func buildImageView() {
+    func buildImageView(_ build: Bool = true) {
+        let topAnchor = imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        let bottomAnchor = imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        let trailingAnchor = imageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        let leadingAnchor = imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+        guard build else {
+            topAnchor.isActive = false
+            bottomAnchor.isActive = false
+            trailingAnchor.isActive = false
+            leadingAnchor.isActive = false
+            imageView.removeFromSuperview()
+            return
+        }
         view.addSubview(imageView)
-        imageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        topAnchor.isActive = true
+        bottomAnchor.isActive = true
+        trailingAnchor.isActive = true
+        leadingAnchor.isActive = true
     }
 
-    // MARK: buildCloseButton
-    func buildCloseButton() {
-        view.addSubview(closeButton)
-        closeButton.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        closeButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor).isActive = true
-    }
-
-    // MARK: pressedClose
-    @objc func pressedClose(sender: UIButton!) {
-        self.dismiss(animated: true)
-    }
 }

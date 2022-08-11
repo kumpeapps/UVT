@@ -12,6 +12,7 @@ plugin 'cocoapods-keys', {
 
 target 'UVT' do
 project 'UVT.xcodeproj'
+	pod 'WhatsNew'
 	pod 'KumpeHelpers'
 	pod 'NewRelicAgent'
 	pod 'PBTutorialManager'

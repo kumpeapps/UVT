@@ -1,0 +1,1 @@
+Static IP page can be tested by using start IP of 1.1.1.1 and block size of 8.
