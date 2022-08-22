@@ -100,7 +100,7 @@ platform :ios do
     run_tests(workspace: "UVT.xcworkspace",
             devices: ["iPhone 12 Pro","iPad Pro (9.7-inch)"],
             scheme: "UVTUITests",
-            only_testing: "UVTUITests/UVTUITests")
+            only_testing: ["UVTUITests/UVTUITests","UVTTests/UVTTests"])
     if !is_ci
       notification(subtitle: "UVT Tests Complete", message: "UVT testing complete", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
     end

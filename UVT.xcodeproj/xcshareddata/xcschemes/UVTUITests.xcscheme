@@ -38,6 +38,16 @@
                ReferencedContainer = "container:UVT.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0F23A61F28AF216500011550"
+               BuildableName = "UVTTests.xctest"
+               BlueprintName = "UVTTests"
+               ReferencedContainer = "container:UVT.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

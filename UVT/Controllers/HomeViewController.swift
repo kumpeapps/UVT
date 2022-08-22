@@ -40,7 +40,8 @@ class HomeViewController: ModulesVC {
         let copperColorCode = KModule.init(title: "Copper Color Code", action: "[segue]segueCopperColors", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.colorPalette.urlString)
         let fiberColorCode = KModule.init(title: "Fiber Color Code", action: "[segue]segueFiberColors", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.colorPalette.urlString)
         let staticIPInstructions = buildModule(title: "UV Static IP Instructions", action: "[segue]segueStaticIP", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.ipv4.urlString, isEnabled: true, watermark: UIImage(named: "icons8-disabled"), settings: settingsBundle)
-        modules = [ethernetWiringScheme, copperColorCode, fiberColorCode, staticIPInstructions]
+        let copperPairCalc = buildModule(title: "Copper Pair Calc", action: "[segue]segueCopperPairCalc", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.pantex.urlString, isEnabled: true, watermark: UIImage(named: "icons8-disabled"), settings: settingsBundle)
+        modules = [ethernetWiringScheme, copperColorCode, fiberColorCode, staticIPInstructions, copperPairCalc]
         setupCollectionView()
     }
 

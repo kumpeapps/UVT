@@ -1,4 +1,4 @@
 - Complete UI Re-Design
-- App is not OpenSource on GitHub
+- App is now OpenSource on GitHub
 
 NOTE: Have any ideas on how to make this app better? Please let me know or raise an issue on GitHub.

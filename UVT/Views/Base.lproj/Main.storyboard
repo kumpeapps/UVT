@@ -40,6 +40,22 @@
             </objects>
             <point key="canvasLocation" x="890" y="-204"/>
         </scene>
+        <!--Copper Pair Calculator-->
+        <scene sceneID="yx7-iR-JNG">
+            <objects>
+                <viewController title="Copper Pair Calculator" id="B6M-BM-HUc" customClass="CopperPairCalcViewController" customModule="UVT" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w6c-I7-1Cb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="l0I-Z2-4SZ"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Copper Pair Calculator" id="OP3-LG-fMh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mVj-PA-NYw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="890" y="-869"/>
+        </scene>
         <!--UVT-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -56,6 +72,7 @@
                         <segue destination="7VH-Hh-1vi" kind="show" identifier="segueCopperColors" id="eEo-8o-X3o"/>
                         <segue destination="7VH-Hh-1vi" kind="show" identifier="segueFiberColors" id="IWT-4u-8yL"/>
                         <segue destination="ELj-Ww-twR" kind="show" identifier="segueStaticIP" id="lLQ-RU-Zfp"/>
+                        <segue destination="B6M-BM-HUc" kind="show" identifier="segueCopperPairCalc" id="FW1-e2-RuB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

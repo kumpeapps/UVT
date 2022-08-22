@@ -10,7 +10,8 @@ concurrency:
 
 jobs:
   Xcode_Tests:
-    if: "!contains(github.event.head_commit.message, '#TestFlight')"
+    if: ${{ always() }}
+    needs: [TestFlight-Beta,TestFlight-Alpha]
     runs-on: macos-latest
 
     steps:
