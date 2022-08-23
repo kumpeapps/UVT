@@ -21,6 +21,12 @@ class UVTTests: XCTestCase {
     func testCopperPairStruct() throws {
         let pair13 = CopperPair.init(pair: 13)
         let pair25 = CopperPair.init(pair: 25)
+        let pair56 = CopperPair.init(pair: 56)
+        XCTAssertEqual(pair56.superBinder, 1)
+        XCTAssertEqual(pair56.binder, 3)
+        XCTAssertEqual(pair56.basePair, 6)
+        XCTAssertEqual(pair56.ringColor, .blue)
+        XCTAssertEqual(pair56.tipColor, .red)
         XCTAssertEqual(pair13.tip, "black")
         XCTAssertEqual(pair13.ring, "green")
         XCTAssertEqual(pair13.tipColor, .black)

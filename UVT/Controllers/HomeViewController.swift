@@ -18,8 +18,7 @@ class HomeViewController: ModulesVC {
 
     // MARK: WhatsNew
     let whatsNew = WhatsNewViewController(items: [
-        WhatsNewItem.text(title: "Re-Design", subtitle: "Complete UI Re-Design"),
-        WhatsNewItem.text(title: "Share Static IP Instrutions", subtitle: "You can now share Static IP info and/or instructions.")
+        WhatsNewItem.text(title: "New Module", subtitle: "Added module for Copper Pair Calculator so you can get the pair colors by entering a pair number.")
     ])
 
     // MARK: viewDidLoad

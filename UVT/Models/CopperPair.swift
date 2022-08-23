@@ -14,38 +14,16 @@ struct CopperPair {
     let superBinder: Int!
     let tip: String!
     let ring: String!
-    var tipColor: UIColor {
-        switch tip {
-        case "white":
-            return .white
-        case "red":
-            return .red
-        case "black":
-            return .black
-        case "yellow":
-            return .yellow
-        case "violet":
-            return .purple
-        default:
-            return .clear
-        }
-    }
-    var ringColor: UIColor {
-        switch ring {
-        case "blue":
-            return .blue
-        case "orange":
-            return .orange
-        case "green":
-            return .green
-        case "brown":
-            return .brown
-        case "slate":
-            return .gray
-        default:
-            return .clear
-        }
-    }
+    let binderTip: String!
+    let binderRing: String!
+    let superBinderTip: String!
+    let superBinderRing: String!
+    let tipColor: UIColor!
+    let ringColor: UIColor!
+    let binderRingColor: UIColor!
+    let binderTipColor: UIColor!
+    let superBinderRingColor: UIColor!
+    let superBinderTipColor: UIColor!
     init(pair: Int) {
         self.pair = pair
         var superBinder: Int {
@@ -104,6 +82,7 @@ struct CopperPair {
                 return 0
             }
         }
+
         self.superBinder = superBinder
         let superBinderSub = (superBinder - 1) * 625
         let baseBinderPair = pair - superBinderSub
@@ -168,39 +147,78 @@ struct CopperPair {
         let binderSub = (binder - 1) * 25
         let basePair = baseBinderPair - binderSub
         self.basePair = basePair
-        var tip: String {
-            switch basePair {
-            case 1...5:
-                return "white"
-            case 6...10:
-                return "red"
-            case 11...15:
-                return "black"
-            case 16...20:
-                return "yellow"
-            case 21...25:
-                return "violet"
-            default:
-                return "unknown"
-            }
-        }
-        self.tip = tip
-        var ring: String {
-            switch basePair {
-            case 1,6,11,16,21:
-                return "blue"
-            case 2,7,12,17,22:
-                return "orange"
-            case 3,8,13,18,23:
-                return "green"
-            case 4,9,14,19,24:
-                return "brown"
-            case 5,10,15,20,25:
-                return "slate"
-            default:
-                return "unknown"
-            }
-        }
-        self.ring = ring
+        self.tip = getTip(basePair)
+        self.ring = getRing(basePair)
+        self.binderTip = getTip(self.binder)
+        self.binderRing = getRing(self.binder)
+        self.superBinderTip = getTip(self.superBinder)
+        self.superBinderRing = getRing(self.superBinder)
+        self.tipColor = getColor(self.tip)
+        self.ringColor = getColor(self.ring)
+        self.binderTipColor = getColor(self.binderTip)
+        self.binderRingColor = getColor(self.binderRing)
+        self.superBinderTipColor = getColor(self.superBinderTip)
+        self.superBinderRingColor = getColor(self.superBinderRing)
+    }
+}
+
+fileprivate func getTip(_ pair: Int) -> String {
+    switch pair {
+    case 1...5:
+        return "white"
+    case 6...10:
+        return "red"
+    case 11...15:
+        return "black"
+    case 16...20:
+        return "yellow"
+    case 21...25:
+        return "violet"
+    default:
+        return "unknown"
+    }
+}
+
+fileprivate func getRing(_ pair: Int) -> String {
+    switch pair {
+    case 1,6,11,16,21:
+        return "blue"
+    case 2,7,12,17,22:
+        return "orange"
+    case 3,8,13,18,23:
+        return "green"
+    case 4,9,14,19,24:
+        return "brown"
+    case 5,10,15,20,25:
+        return "slate"
+    default:
+        return "unknown"
+    }
+}
+
+fileprivate func getColor(_ color: String) -> UIColor {
+    switch color {
+    case "blue":
+        return .blue
+    case "orange":
+        return .orange
+    case "green":
+        return .green
+    case "brown":
+        return .brown
+    case "slate":
+        return .gray
+    case "white":
+        return .white
+    case "red":
+        return .red
+    case "black":
+        return .black
+    case "yellow":
+        return .yellow
+    case "violet":
+        return .purple
+    default:
+        return .clear
     }
 }
