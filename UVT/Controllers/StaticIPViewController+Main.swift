@@ -44,7 +44,7 @@ extension StaticIPViewController {
             let title = UILabel()
             title.translatesAutoresizingMaskIntoConstraints = false
             title.font = UIFont(name: "Marker Felt", size: 21)
-            title.textColor = .black
+            title.textColor = .white
             title.text = "Uverse Static IP Instructions"
             title.adjustsFontSizeToFitWidth = true
             title.tag = 1

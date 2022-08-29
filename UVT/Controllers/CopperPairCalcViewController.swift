@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 import KumpeHelpers
+import DeviceKit
 
 class CopperPairCalcViewController: UIViewController {
     // MARK: Parameters
     var labelPairInfo = UILabel()
     var fieldPair = UITextField()
-    var pairView = UIView()
+    var pairView = UIImageView()
     var binderView = UIView()
     var superBinderView = UIView()
     var buttonSubmit = UIButton()
@@ -77,14 +78,12 @@ class CopperPairCalcViewController: UIViewController {
                 string: "Pair #",
                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
             )
-            field.keyboardType = .decimalPad
+            field.keyboardType = .numberPad
             field.borderStyle = .roundedRect
             field.textAlignment = .center
             field.backgroundColor = .white
             field.textColor = .black
             field.clearsOnInsertion = true
-            field.returnKeyType = .search
-            //button.addTarget(self, action: #selector(buildPACE(sender:)), for: .touchUpInside)
             field.addTarget(self, action: #selector(submitPair), for: .primaryActionTriggered)
             field.addTarget(self, action: #selector(submitPair), for: .editingDidEnd)
             return field
@@ -102,6 +101,7 @@ class CopperPairCalcViewController: UIViewController {
             label.numberOfLines = -1
             label.text = text
             label.textAlignment = .center
+            label.textColor = .white
             return label
         }()
         view.addSubview(labelPairInfo)
@@ -128,13 +128,19 @@ class CopperPairCalcViewController: UIViewController {
         buildSuperBinderView(pair)
         buildBinderView(pair)
         buildPairView(pair)
+        self.view.endEditing(true)
     }
 
     func buildSuperBinderView(_ pair: CopperPair) {
+        guard !UIDevice.current.orientation.isLandscape else {
+            superBinderView.isHidden = true
+            return
+        }
         superBinderView = {
             let view = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
             view.backgroundColor = .white
+            view.isHidden = false
             return view
         }()
         view.addSubview(superBinderView)
@@ -162,21 +168,24 @@ class CopperPairCalcViewController: UIViewController {
     }
     
     func buildBinderView(_ pair: CopperPair) {
+        guard !UIDevice.current.orientation.isLandscape else {
+            binderView.isHidden = true
+            return
+        }
         binderView = {
             let view = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
             view.backgroundColor = .white
+            view.isHidden = false
             return view
         }()
+        binderView.isHidden = false
         view.addSubview(binderView)
         binderView.topAnchor.constraint(equalTo: superBinderView.topAnchor, constant: 50).isActive = true
         binderView.trailingAnchor.constraint(equalTo: superBinderView.trailingAnchor, constant: -50).isActive = true
         binderView.leadingAnchor.constraint(equalTo: superBinderView.leadingAnchor, constant: 50).isActive = true
         binderView.bottomAnchor.constraint(equalTo: superBinderView.bottomAnchor, constant: -50).isActive = true
-        
-        if pair.binder == 1 {
-            binderView.isHidden = true
-        }
+
         gradientBinder = {
             let gradient = CAGradientLayer()
             gradient.type = .conic
@@ -184,9 +193,6 @@ class CopperPairCalcViewController: UIViewController {
                 pair.binderTipColor.cgColor,
                 pair.binderRingColor.cgColor
             ]
-            if pair.binder == 1 {
-                gradient.colors = [UIColor.systemOrange.cgColor]
-            }
             gradient.locations = [0, 1]
             gradient.startPoint = CGPoint(x: 1, y: 1)
             gradient.endPoint = CGPoint(x: 0, y: 0)
@@ -196,10 +202,15 @@ class CopperPairCalcViewController: UIViewController {
     }
     
     func buildPairView(_ pair: CopperPair) {
+        guard !UIDevice.current.orientation.isLandscape else {
+            pairView.isHidden = true
+            return
+        }
         pairView = {
-            let view = UIView()
+            let view = UIImageView()
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = .white
+            view.backgroundColor = .clear
+            view.isHidden = false
             return view
         }()
         view.addSubview(pairView)
@@ -219,12 +230,22 @@ class CopperPairCalcViewController: UIViewController {
             gradient.endPoint = CGPoint(x: 1, y: 1)
             return gradient
         }()
-        pairView.layer.insertSublayer(gradientPair, at: 0)
+        pairView.image = UIImage(named: "Pair \(pair.basePair!)")
     }
 
     override func viewDidLayoutSubviews() {
         gradientSuperBinder.frame = superBinderView.bounds
         gradientBinder.frame = binderView.bounds
         gradientPair.frame = pairView.bounds
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        submitPair()
+    }
+
+    //MARK: Hide Keyboard
+    //Hides Keyboard when user touches outside of text field
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }

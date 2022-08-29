@@ -24,8 +24,9 @@ class HomeViewController: ModulesVC {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        cellBackgroundColor = .systemOrange
-        collectionViewBackgroundColor = .systemOrange
+        view.backgroundColor = .systemBlue
+        cellBackgroundColor = .clear
+        collectionViewBackgroundColor = .clear
         settingsBundle.alert.title = "Module Not Implemented!"
         settingsBundle.alert.message = "This module is still under development"
         settingsBundle.alert.theme = .warning
