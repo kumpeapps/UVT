@@ -44,6 +44,8 @@ jobs:
       run: bundle exec pod update
 
     - name: Run tests
+      env:
+       FASTLANE_EXPLICIT_OPEN_SIMULATOR : "2"
       run: bundle exec fastlane test
 
   TestFlight-Alpha:
