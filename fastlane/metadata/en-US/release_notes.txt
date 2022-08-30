@@ -1,4 +1,4 @@
-- Complete UI Re-Design
+- Added Copper Pair to Color Calculator
 - App is now OpenSource on GitHub
 
 NOTE: Have any ideas on how to make this app better? Please let me know or raise an issue on GitHub.

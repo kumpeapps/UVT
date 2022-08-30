@@ -44,7 +44,12 @@ platform :ios do
       add_badge(dark: true)
     end
     build_app(scheme: "UVT", workspace: "UVT.xcworkspace")
-    upload_to_testflight(distribute_external: true, groups: "Public Testers", submit_beta_review: true, changelog: "Bug Fixes and New Features")
+    upload_to_testflight(
+      distribute_external: true, groups: "Public Testers", 
+      submit_beta_review: true, changelog: "Bug Fixes and New Features",
+      expire_previous_builds: true,
+      reject_build_waiting_for_review: true
+    )
   end
 
   desc "Build and upload alpha version to testflight"
