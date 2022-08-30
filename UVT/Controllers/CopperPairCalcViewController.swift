@@ -11,6 +11,7 @@ import KumpeHelpers
 import DeviceKit
 
 class CopperPairCalcViewController: UIViewController {
+
     // MARK: Parameters
     var labelPairInfo = UILabel()
     var fieldPair = UITextField()
@@ -46,6 +47,7 @@ class CopperPairCalcViewController: UIViewController {
     }()
     var gradientSuperBinder = CAGradientLayer()
 
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         buildFieldPair()
@@ -53,6 +55,7 @@ class CopperPairCalcViewController: UIViewController {
         buildPairInfo()
     }
 
+    // MARK: buildSubmitButton
     func buildSubmitButton() {
         buttonSubmit = {
             let button = UIButton()
@@ -70,6 +73,7 @@ class CopperPairCalcViewController: UIViewController {
         buttonSubmit.widthAnchor.constraint(equalToConstant: 100).isActive = true
     }
 
+    // MARK: buildFieldPair
     func buildFieldPair() {
         fieldPair = {
             let field = UITextField()
@@ -94,6 +98,7 @@ class CopperPairCalcViewController: UIViewController {
         fieldPair.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
 
+    // MARK: buildPairInfo
     func buildPairInfo(_ text: String = "Please enter pair number then hit enter/search") {
         labelPairInfo = {
             let label = UILabel()
@@ -111,6 +116,7 @@ class CopperPairCalcViewController: UIViewController {
         labelPairInfo.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 
+    // MARK: submitPair
     @objc func submitPair() {
         superBinderView.removeFromSuperview()
         binderView.removeFromSuperview()
@@ -131,6 +137,7 @@ class CopperPairCalcViewController: UIViewController {
         self.view.endEditing(true)
     }
 
+    // MARK: buildSuperBinderView
     func buildSuperBinderView(_ pair: CopperPair) {
         guard !UIDevice.current.orientation.isLandscape || Device.current.isPad else {
             superBinderView.isHidden = true
@@ -166,7 +173,8 @@ class CopperPairCalcViewController: UIViewController {
         superBinderView.layer.insertSublayer(gradientSuperBinder, at: 0)
         gradientSuperBinder.frame = superBinderView.bounds
     }
-    
+
+    // MARK: buildBinderView
     func buildBinderView(_ pair: CopperPair) {
         guard !UIDevice.current.orientation.isLandscape || Device.current.isPad else {
             binderView.isHidden = true
@@ -200,7 +208,8 @@ class CopperPairCalcViewController: UIViewController {
         }()
         binderView.layer.insertSublayer(gradientBinder, at: 0)
     }
-    
+
+    // MARK: buildPairView
     func buildPairView(_ pair: CopperPair) {
         guard !UIDevice.current.orientation.isLandscape || Device.current.isPad else {
             pairView.isHidden = true
@@ -233,19 +242,22 @@ class CopperPairCalcViewController: UIViewController {
         pairView.image = UIImage(named: "Pair \(pair.basePair!)")
     }
 
+    // MARK: viewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
         gradientSuperBinder.frame = superBinderView.bounds
         gradientBinder.frame = binderView.bounds
         gradientPair.frame = pairView.bounds
     }
 
+    // MARK: viewWillTransistion
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         submitPair()
     }
 
-    //MARK: Hide Keyboard
-    //Hides Keyboard when user touches outside of text field
+    // MARK: Hide Keyboard
+    // Hides Keyboard when user touches outside of text field
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+
 }
