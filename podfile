@@ -20,5 +20,5 @@ project 'UVT.xcodeproj'
 	pod 'PBTutorialManager'
 	pod 'BadgeSwift'
 	pod 'Kingfisher'
-	pod 'ModulesVC', :git => 'https://github.com/kumpeapps/ModulesVC.git', :branch => 'development'
+	pod 'ModulesVC'
 end

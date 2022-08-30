@@ -63,7 +63,7 @@ PODS:
     - ReachabilitySwift
     - SwiftMessages
     - Sync
-  - ModulesVC (1.0):
+  - ModulesVC (1.0.2):
     - BadgeSwift
     - CollectionViewCenteredFlowLayout
     - DeviceKit
@@ -94,7 +94,7 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - Kingfisher
   - KumpeHelpers
-  - ModulesVC (from `https://github.com/kumpeapps/ModulesVC.git`, branch `development`)
+  - ModulesVC
   - NewRelicAgent
   - PBTutorialManager
   - WhatsNew
@@ -115,6 +115,7 @@ SPEC REPOS:
     - Haptico
     - Kingfisher
     - KumpeHelpers
+    - ModulesVC
     - nanopb
     - NewRelicAgent
     - PBTutorialManager
@@ -128,14 +129,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Keys:
     :path: Pods/CocoaPodsKeys
-  ModulesVC:
-    :branch: development
-    :git: https://github.com/kumpeapps/ModulesVC.git
-
-CHECKOUT OPTIONS:
-  ModulesVC:
-    :commit: 795416926d8fe72f84ce92e3e71cb9260802e1c4
-    :git: https://github.com/kumpeapps/ModulesVC.git
 
 SPEC CHECKSUMS:
   AFCurvedArrowView: 5fa8fcc1f77f5428ab34d7a1c6696b88c3c20f40
@@ -153,7 +146,7 @@ SPEC CHECKSUMS:
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   Kingfisher: 0086ad83719761ba9b2cdaf6ef4d5b4878cbae23
   KumpeHelpers: 9736ffa87349f76648093851e74e6669936ef46a
-  ModulesVC: 0fe0973d53307506c6d19ad5978c2ec67c9367bf
+  ModulesVC: d14cdad85f77e3807c8d5378316c60590c8795df
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   NewRelicAgent: 89724f6460b8be82e41ce04724444aed9b15d486
   PBTutorialManager: 7c2383247c0b0da71cf14438c0a2a737bca51a42
@@ -164,6 +157,6 @@ SPEC CHECKSUMS:
   Sync: 86bb8aa0ea2f955ea5ac97b7b73129f86591c39e
   WhatsNew: d66a52b294e90d5bc133877e270ea7ce0b945003
 
-PODFILE CHECKSUM: ec4be737296c0e05c18727bf2d6417f06d1355cd
+PODFILE CHECKSUM: ec5b2b1040b26b5be29cf5acc1e68040de5c5705
 
 COCOAPODS: 1.11.3
