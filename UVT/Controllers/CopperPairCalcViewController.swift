@@ -132,7 +132,7 @@ class CopperPairCalcViewController: UIViewController {
     }
 
     func buildSuperBinderView(_ pair: CopperPair) {
-        guard !UIDevice.current.orientation.isLandscape else {
+        guard !UIDevice.current.orientation.isLandscape || Device.current.isPad else {
             superBinderView.isHidden = true
             return
         }
@@ -168,7 +168,7 @@ class CopperPairCalcViewController: UIViewController {
     }
     
     func buildBinderView(_ pair: CopperPair) {
-        guard !UIDevice.current.orientation.isLandscape else {
+        guard !UIDevice.current.orientation.isLandscape || Device.current.isPad else {
             binderView.isHidden = true
             return
         }
@@ -202,7 +202,7 @@ class CopperPairCalcViewController: UIViewController {
     }
     
     func buildPairView(_ pair: CopperPair) {
-        guard !UIDevice.current.orientation.isLandscape else {
+        guard !UIDevice.current.orientation.isLandscape || Device.current.isPad else {
             pairView.isHidden = true
             return
         }
