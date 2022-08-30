@@ -10,6 +10,7 @@ import KumpeHelpers
 import ModulesVC
 import WhatsNew
 import GoogleMobileAds
+import Keys
 
 class HomeViewController: ModulesVC {
 
@@ -38,11 +39,11 @@ class HomeViewController: ModulesVC {
         bannerView.rootViewController = self
 
         addBannerViewToView(bannerView)
-        
+
         #if DEBUG
-            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         #else
-            bannerView.adUnitID = "ca-app-pub-8070283866991781/1902216679"
+        bannerView.adUnitID = UVTKeys().admob_unit_id
         #endif
           }
 
@@ -75,7 +76,8 @@ class HomeViewController: ModulesVC {
         let fiberColorCode = KModule.init(title: "Fiber Color Code", action: "[segue]segueFiberColors", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.colorPalette.urlString)
         let staticIPInstructions = buildModule(title: "UV Static IP Instructions", action: "[segue]segueStaticIP", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.ipv4.urlString, isEnabled: true, watermark: UIImage(named: "icons8-disabled"), settings: settingsBundle)
         let copperPairCalc = buildModule(title: "Copper Pair to Color", action: "[segue]segueCopperPairCalc", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.pantex.urlString, isEnabled: true, watermark: UIImage(named: "icons8-disabled"), settings: settingsBundle)
-        modules = [ethernetWiringScheme, copperColorCode, fiberColorCode, staticIPInstructions, copperPairCalc]
+        let help = buildModule(title: "Support/Suggestions", action: "[url]https://github.com/kumpeapps/UVT/issues", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.whyquest.urlString)
+        modules = [ethernetWiringScheme, copperColorCode, fiberColorCode, staticIPInstructions, copperPairCalc, help]
         setupCollectionView()
         bannerView.load(GADRequest())
     }

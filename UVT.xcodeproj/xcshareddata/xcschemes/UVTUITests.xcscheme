@@ -67,15 +67,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0FC6AD67288E0C5000A49730"
-            BuildableName = "UVTUITests.xctest"
-            BlueprintName = "UVTUITests"
-            ReferencedContainer = "container:UVT.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
