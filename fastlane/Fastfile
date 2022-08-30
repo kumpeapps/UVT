@@ -103,7 +103,7 @@ platform :ios do
 
   lane :test do
     run_tests(workspace: "UVT.xcworkspace",
-            devices: ["iPhone 12 Pro","iPad Pro (12.9-inch) (5th generation"],
+            devices: ["iPhone 12 Pro","iPad Pro (12.9-inch) (3rd generation)"],
             scheme: "UVTUITests",
             only_testing: ["UVTUITests/UVTUITests","UVTTests/UVTTests"])
     if !is_ci
