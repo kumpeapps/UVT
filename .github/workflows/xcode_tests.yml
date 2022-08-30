@@ -37,6 +37,7 @@ jobs:
     - name: CocoaPods dependencies
       env:
         newrelic_token: ${{ secrets.NEWRELIC_TOKEN }}
+        admob_unit_id: ${{ secrets.ADMOB_UNIT_ID }}
       run: bundle exec pod check || bundle exec pod install
 
     - name: CocoaPods Update
