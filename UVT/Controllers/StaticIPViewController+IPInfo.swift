@@ -34,6 +34,7 @@ extension StaticIPViewController {
             text.numberOfLines = -1
             text.textAlignment = .center
             text.text = ipInfoText
+            text.textColor = .white
             return text
         }()
         scrollingView.addSubview(self.labelText)

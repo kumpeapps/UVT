@@ -15,6 +15,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FmJ-22-l2z">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0w0-q2-bKg"/>
@@ -31,14 +35,52 @@
                     <view key="view" contentMode="scaleToFill" id="tjt-zN-QyU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="unz-ak-5yw">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="JPU-x8-8oG"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                        <constraints>
+                            <constraint firstItem="unz-ak-5yw" firstAttribute="bottom" secondItem="tjt-zN-QyU" secondAttribute="bottom" id="11u-XV-Mdj"/>
+                            <constraint firstItem="unz-ak-5yw" firstAttribute="trailing" secondItem="tjt-zN-QyU" secondAttribute="trailing" id="CXs-D4-24n"/>
+                            <constraint firstItem="unz-ak-5yw" firstAttribute="leading" secondItem="tjt-zN-QyU" secondAttribute="leading" id="bvH-8g-GRL"/>
+                            <constraint firstItem="unz-ak-5yw" firstAttribute="top" secondItem="tjt-zN-QyU" secondAttribute="top" id="fpS-zP-VNN"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wYh-dS-ZYv"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQa-6J-NEQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="890" y="-204"/>
+        </scene>
+        <!--Copper Pair Calculator-->
+        <scene sceneID="yx7-iR-JNG">
+            <objects>
+                <viewController title="Copper Pair Calculator" id="B6M-BM-HUc" customClass="CopperPairCalcViewController" customModule="UVT" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w6c-I7-1Cb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="eto-Pb-0kk">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="l0I-Z2-4SZ"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                        <constraints>
+                            <constraint firstItem="eto-Pb-0kk" firstAttribute="trailing" secondItem="w6c-I7-1Cb" secondAttribute="trailing" id="Ef2-Cv-S2T"/>
+                            <constraint firstItem="eto-Pb-0kk" firstAttribute="bottom" secondItem="w6c-I7-1Cb" secondAttribute="bottom" id="Jgz-Hp-YQQ"/>
+                            <constraint firstItem="eto-Pb-0kk" firstAttribute="leading" secondItem="w6c-I7-1Cb" secondAttribute="leading" id="gdq-V8-hkE"/>
+                            <constraint firstItem="eto-Pb-0kk" firstAttribute="top" secondItem="w6c-I7-1Cb" secondAttribute="top" id="mP5-Gi-jr4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Copper Pair Calculator" id="OP3-LG-fMh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mVj-PA-NYw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="890" y="-869"/>
         </scene>
         <!--UVT-->
         <scene sceneID="tne-QT-ifu">
@@ -47,8 +89,19 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="WiU-Ua-lu5">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                        <constraints>
+                            <constraint firstItem="WiU-Ua-lu5" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="PHx-jy-eUu"/>
+                            <constraint firstItem="WiU-Ua-lu5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Qje-ZL-Ae9"/>
+                            <constraint firstItem="WiU-Ua-lu5" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="jAX-bl-pd4"/>
+                            <constraint firstItem="WiU-Ua-lu5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="z6z-dM-YHq"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ci5-54-qJi"/>
                     <connections>
@@ -56,11 +109,12 @@
                         <segue destination="7VH-Hh-1vi" kind="show" identifier="segueCopperColors" id="eEo-8o-X3o"/>
                         <segue destination="7VH-Hh-1vi" kind="show" identifier="segueFiberColors" id="IWT-4u-8yL"/>
                         <segue destination="ELj-Ww-twR" kind="show" identifier="segueStaticIP" id="lLQ-RU-Zfp"/>
+                        <segue destination="B6M-BM-HUc" kind="show" identifier="segueCopperPairCalc" id="FW1-e2-RuB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="51"/>
+            <point key="canvasLocation" x="18.840579710144929" y="50.892857142857139"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="OJr-bo-M0C">
@@ -69,8 +123,19 @@
                     <view key="view" contentMode="scaleToFill" id="pPa-CA-CjM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="H2M-Of-SLh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dzd-8e-uVN"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                        <constraints>
+                            <constraint firstItem="H2M-Of-SLh" firstAttribute="bottom" secondItem="pPa-CA-CjM" secondAttribute="bottom" id="B6N-9x-GzH"/>
+                            <constraint firstItem="H2M-Of-SLh" firstAttribute="trailing" secondItem="pPa-CA-CjM" secondAttribute="trailing" id="Yeu-zp-cha"/>
+                            <constraint firstItem="H2M-Of-SLh" firstAttribute="leading" secondItem="pPa-CA-CjM" secondAttribute="leading" id="aWh-bm-lm0"/>
+                            <constraint firstItem="H2M-Of-SLh" firstAttribute="top" secondItem="pPa-CA-CjM" secondAttribute="top" id="ykf-jt-fhm"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dd9-fW-x2C"/>
                 </viewController>
@@ -83,8 +148,9 @@
         <segue reference="IWT-4u-8yL"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="background" width="1920" height="1440"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -38,6 +38,16 @@
                ReferencedContainer = "container:UVT.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0F23A61F28AF216500011550"
+               BuildableName = "UVTTests.xctest"
+               BlueprintName = "UVTTests"
+               ReferencedContainer = "container:UVT.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -57,15 +67,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0FC6AD67288E0C5000A49730"
-            BuildableName = "UVTUITests.xctest"
-            BlueprintName = "UVTUITests"
-            ReferencedContainer = "container:UVT.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -1,0 +1,9 @@
+name: Released
+
+on: release
+
+jobs:
+  Close Milestone:
+    steps:
+    - name: Close Milestone With Tagging
+      uses: adlerhsieh/prepare-release@0.1.2

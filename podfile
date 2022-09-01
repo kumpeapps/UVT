@@ -5,18 +5,20 @@ use_frameworks!
 plugin 'cocoapods-keys', {
 	:project => "UVT",
 	:keys => [
-		"newrelic_token"
+		"newrelic_token",
+		"admob_unit_id"
 	],
 	:target => "UVT"
 }
 
 target 'UVT' do
 project 'UVT.xcodeproj'
+	pod 'Google-Mobile-Ads-SDK'
 	pod 'WhatsNew'
 	pod 'KumpeHelpers'
 	pod 'NewRelicAgent'
 	pod 'PBTutorialManager'
 	pod 'BadgeSwift'
 	pod 'Kingfisher'
-	pod 'ModulesVC', :git => 'https://github.com/kumpeapps/ModulesVC.git', :branch => 'development'
+	pod 'ModulesVC'
 end

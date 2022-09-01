@@ -44,7 +44,12 @@ platform :ios do
       add_badge(dark: true)
     end
     build_app(scheme: "UVT", workspace: "UVT.xcworkspace")
-    upload_to_testflight(distribute_external: true, groups: "Public Testers", submit_beta_review: true, changelog: "Bug Fixes and New Features")
+    upload_to_testflight(
+      distribute_external: true, groups: "Public Testers", 
+      submit_beta_review: true, changelog: "Bug Fixes and New Features",
+      expire_previous_builds: true,
+      reject_build_waiting_for_review: true
+    )
   end
 
   desc "Build and upload alpha version to testflight"
@@ -98,9 +103,9 @@ platform :ios do
 
   lane :test do
     run_tests(workspace: "UVT.xcworkspace",
-            devices: ["iPhone 12 Pro","iPad Pro (9.7-inch)"],
+            devices: ["iPhone 12 Pro","iPad Pro (12.9-inch) (3rd generation)"],
             scheme: "UVTUITests",
-            only_testing: "UVTUITests/UVTUITests")
+            only_testing: ["UVTUITests/UVTUITests","UVTTests/UVTTests"])
     if !is_ci
       notification(subtitle: "UVT Tests Complete", message: "UVT testing complete", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
     end

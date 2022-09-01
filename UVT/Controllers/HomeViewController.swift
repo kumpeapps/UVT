@@ -9,29 +9,64 @@ import UIKit
 import KumpeHelpers
 import ModulesVC
 import WhatsNew
+import GoogleMobileAds
+import Keys
 
 class HomeViewController: ModulesVC {
 
     // MARK: Parameters
     var settingsBundle = KModuleSettings()
     var reachable: ReachabilitySetup!
+    var bannerView: GADBannerView!
 
     // MARK: WhatsNew
     let whatsNew = WhatsNewViewController(items: [
-        WhatsNewItem.text(title: "Re-Design", subtitle: "Complete UI Re-Design"),
-        WhatsNewItem.text(title: "Share Static IP Instrutions", subtitle: "You can now share Static IP info and/or instructions.")
+        WhatsNewItem.text(title: "New Module", subtitle: "Added module for Copper Pair to Color Calculator so you can get the pair colors by entering a pair number.")
     ])
 
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        cellBackgroundColor = .systemOrange
-        collectionViewBackgroundColor = .systemOrange
+        view.backgroundColor = .systemBlue
+        cellBackgroundColor = .clear
+        collectionViewBackgroundColor = .clear
         settingsBundle.alert.title = "Module Not Implemented!"
         settingsBundle.alert.message = "This module is still under development"
         settingsBundle.alert.theme = .warning
         reachable = ReachabilitySetup()
-    }
+        // In this case, we instantiate the banner with desired ad size.
+        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bannerView.rootViewController = self
+
+        addBannerViewToView(bannerView)
+
+        #if DEBUG
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        #else
+        bannerView.adUnitID = UVTKeys().admob_unit_id
+        #endif
+          }
+
+          func addBannerViewToView(_ bannerView: GADBannerView) {
+            bannerView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(bannerView)
+            view.addConstraints(
+              [NSLayoutConstraint(item: bannerView,
+                                  attribute: .bottom,
+                                  relatedBy: .equal,
+                                  toItem: bottomLayoutGuide,
+                                  attribute: .top,
+                                  multiplier: 1,
+                                  constant: 0),
+               NSLayoutConstraint(item: bannerView,
+                                  attribute: .centerX,
+                                  relatedBy: .equal,
+                                  toItem: view,
+                                  attribute: .centerX,
+                                  multiplier: 1,
+                                  constant: 0)
+              ])
+          }
 
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
@@ -40,8 +75,11 @@ class HomeViewController: ModulesVC {
         let copperColorCode = KModule.init(title: "Copper Color Code", action: "[segue]segueCopperColors", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.colorPalette.urlString)
         let fiberColorCode = KModule.init(title: "Fiber Color Code", action: "[segue]segueFiberColors", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.colorPalette.urlString)
         let staticIPInstructions = buildModule(title: "UV Static IP Instructions", action: "[segue]segueStaticIP", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.ipv4.urlString, isEnabled: true, watermark: UIImage(named: "icons8-disabled"), settings: settingsBundle)
-        modules = [ethernetWiringScheme, copperColorCode, fiberColorCode, staticIPInstructions]
+        let copperPairCalc = buildModule(title: "Copper Pair to Color", action: "[segue]segueCopperPairCalc", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.pantex.urlString, isEnabled: true, watermark: UIImage(named: "icons8-disabled"), settings: settingsBundle)
+        let help = buildModule(title: "Support/Suggestions", action: "[url]https://github.com/kumpeapps/UVT/issues", icon: UIImage(named: "icons8-swirl")!, remoteIconURL: Icons8.whyquest.urlString)
+        modules = [ethernetWiringScheme, copperColorCode, fiberColorCode, staticIPInstructions, copperPairCalc, help]
         setupCollectionView()
+        bannerView.load(GADRequest())
     }
 
     // MARK: viewDidAppear
