@@ -1,14 +1,14 @@
 version: '11.0.0({build})'
 environment:
   matrix:
+  - job_name: "build iOS"
+    appveyor_build_worker_image: macOS-Sonoma
+    build: Script
   - job_name: "build Android"
     appveyor_build_worker_image: Ubuntu
     build: Script
   - job_name: "build macOS"
     appveyor_build_worker_image: macOS
-    build: Script
-  - job_name: "build iOS"
-    appveyor_build_worker_image: macOS-Sonoma
     build: Script
 
 #  skip_branch_with_pr: true
@@ -127,7 +127,7 @@ for:
 
   build_script:
   - echo "is_mobile=1" >> .env
-  - flet build ipa --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref Kumpe3D_Kiosk --flutter-build-args=--release 
+  - flet build ipa --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref UVT --flutter-build-args=--release 
   # --team 2T42Z3DM34
 
   after_build:
