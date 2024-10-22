@@ -16,103 +16,42 @@ update_fastlane
 default_platform(:ios)
 
 platform :ios do
-
-  desc "Generate new localized screenshots"
-  lane :screenshots do
-    capture_screenshots(workspace: "UVT.xcworkspace",
-              scheme: "UVTUITests",
-              only_testing: "UVTUITests/UVTTakeScreenshots")
-    frameit
-    sh('find ./screenshots/en-US/ -type f \! -name "*framed*.png" -delete')
+  desc "Updates match certificates"
+  lane :update_match do
+    if is_ci
+      setup_ci
+      api_key = app_store_connect_api_key(
+        "key_id": ENV['APPLE_APP_STORE_API_KEY_ID'],
+        "issuer_id": ENV['APPLE_APPSTORE_API_ISSUER_ID'],
+        "key_content": ENV['APPLE_APP_STORE_API_KEY']
+      )
+    end
     if !is_ci
-      notification(subtitle: "Finished Screenshots", message: "Fastlane has finished gathering screenshots for UVT", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
-    end
-  end
-
-  desc "Build and upload beta version to testflight"
-  lane :beta do
-    if is_ci
-    setup_ci
-      app_store_connect_api_key(
-        "key_id": ENV['APPLE_APP_STORE_API_KEY_ID'],
-        "issuer_id": ENV['APPLE_APPSTORE_API_ISSUER_ID'],
-        "key_content": ENV['APPLE_APP_STORE_API_KEY']
-      )
-  end
-    increment_build_number
-    if is_ci
-      add_badge(dark: true)
-    end
-    build_app(scheme: "UVT", workspace: "UVT.xcworkspace")
-    upload_to_testflight(
-      distribute_external: true, groups: "Public Testers", 
-      submit_beta_review: true, changelog: "Bug Fixes and New Features",
-      expire_previous_builds: true,
-      reject_build_waiting_for_review: true
+      api_key = app_store_connect_api_key(
+        key_id: "BZ9R9Y8474",
+        issuer_id: "69a6de74-e8dd-47e3-e053-5b8c7c11a4d1",
+        key_filepath: "/Users/justinkumpe/Documents/AuthKey_BZ9R9Y8474.p8",
+        duration: 1200, # optional (maximum 1200)
+        in_house: false # optional but may be required if using match/sigh
     )
-  end
-
-  desc "Build and upload alpha version to testflight"
-  lane :alpha do
-    if is_ci
-    setup_ci
-      app_store_connect_api_key(
-        "key_id": ENV['APPLE_APP_STORE_API_KEY_ID'],
-        "issuer_id": ENV['APPLE_APPSTORE_API_ISSUER_ID'],
-        "key_content": ENV['APPLE_APP_STORE_API_KEY']
-      )
-  end
-    increment_build_number
-    if is_ci
-      add_badge(dark: true, alpha: true)
     end
-    build_app(scheme: "UVT", workspace: "UVT.xcworkspace")
-    upload_to_testflight(skip_waiting_for_build_processing: true)
-  end
-
-  desc "Build and upload release version to Apple"
-  lane :release do
-    if is_ci
-		setup_ci
-  		app_store_connect_api_key(
-     		"key_id": ENV['APPLE_APP_STORE_API_KEY_ID'],
-     		"issuer_id": ENV['APPLE_APPSTORE_API_ISSUER_ID'],
-     		"key_content": ENV['APPLE_APP_STORE_API_KEY']
-   		)
-	end
-  	increment_build_number
-  	build_app(scheme: "UVT", workspace: "UVT.xcworkspace")
-  	deliver(
-  		force: true,
-  		metadata_path: "./fastlane/metadata",
-  		submit_for_review: false,
-    	automatic_release: true,
-      overwrite_screenshots: true
-  	)
-  	if !is_ci
-  		notification(subtitle: "Finished Uploading ", message: "UVT release build upload complete", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
-  	end
+    match(
+      generate_apple_certs: true, 
+      api_key: api_key,
+      type: "appstore"
+    )
+    match(
+      generate_apple_certs: true, 
+      api_key: api_key,
+      type: "development"
+    )
   end
 
   lane :matchget do
 	if is_ci
 		setup_ci
 	end
-	match(type: "appstore", readonly: is_ci, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], git_url: "https://github.com/kumpeapps/fastlane_certs.git")
+  match(generate_apple_certs: true, type: "development", readonly: is_ci, app_identifier: "net.justinkumpe.apps.jkuvt", git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], git_url: "https://github.com/kumpeapps/fastlane_certs.git")
+  match(generate_apple_certs: true, type: "appstore", readonly: is_ci, app_identifier: "net.justinkumpe.apps.jkuvt", git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], git_url: "https://github.com/kumpeapps/fastlane_certs.git")
   end
-
-  lane :test do
-    run_tests(workspace: "UVT.xcworkspace",
-            devices: ["iPhone 12 Pro","iPad Pro (12.9-inch) (3rd generation)"],
-            scheme: "UVTUITests",
-            only_testing: ["UVTUITests/UVTUITests","UVTTests/UVTTests"])
-    if !is_ci
-      notification(subtitle: "UVT Tests Complete", message: "UVT testing complete", title: "fastlane: UVT", content_image: "https://api.kumpeapps.com/images/kumpeapps/base_logo_white_background.png")
-    end
-  end
-
-  lane :get_metadata do
-  	fastlane deliver download_metadata
-  end
-
 end

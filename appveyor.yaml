@@ -1,0 +1,160 @@
+version: '11.0.0({build})'
+environment:
+  matrix:
+  - job_name: "build Android"
+    appveyor_build_worker_image: Ubuntu
+    build: Script
+  - job_name: "build macOS"
+    appveyor_build_worker_image: macOS
+    build: Script
+  - job_name: "build iOS"
+    appveyor_build_worker_image: macOS-Sonoma
+    build: Script
+
+#  skip_branch_with_pr: true
+stack: python 3.11
+
+install:
+- pip install -r requirements.txt
+- flutter upgrade --force
+
+before_build:
+- echo "APP_ENV=prod" > .env
+- echo "SERVICE_TOKEN=$SERVICE_TOKEN" >> .env
+- echo "VERSION=$APPVEYOR_BUILD_VERSION" >> .env
+- echo "BUILD=$APPVEYOR_BUILD_NUMBER" >> .env
+
+test: false
+
+# Publish artifacts to GitHub Releases on "tag" builds 
+deploy:
+  provider: GitHub
+  auth_token: $(GITHUB_TOKEN)
+  on:
+    APPVEYOR_REPO_TAG: true
+
+#
+#   Windows package
+#
+for:
+# -
+#   matrix:
+#     only:
+#     - image: Visual Studio 2019
+    
+#   build_script:
+#   - flet build windows --project "jkuvt" --product "UVT" --build-version "1.0.0" --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+#   after_build:
+#   - 7z a jkuvt-windows.zip %CD%\build\windows\*.exe
+
+#   artifacts:
+#   - path: jkuvt-windows.zip
+
+#
+#   macOS package
+#
+-
+  matrix:
+    only:
+    - job_name: "build macOS"
+    - SERVICE_TOKEN: $SERVICE_TOKEN
+    - APPVEYOR_BUILD_VERSION: $APPVEYOR_BUILD_VERSION
+    - APPVEYOR_BUILD_NUMBER: $APPVEYOR_BUILD_NUMBER
+    - APPLE_APP_STORE_API_KEY_ID: $APPLE_APP_STORE_API_KEY_ID
+    - APPLE_APPSTORE_API_ISSUER_ID: $APPLE_APPSTORE_API_ISSUER_ID
+    - APPLE_APP_STORE_API_KEY: $APPLE_APP_STORE_API_KEY
+    - FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
+    - FASTLANE_PASSWORD: $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
+    - FASTLANE_USER: "jakumpe@justinkumpe.net"
+    - MATCH_PASSWORD: $MATCH_KEYCHAIN_PASSWORD
+    - MATCH_KEYCHAIN_PASSWORD: $MATCH_KEYCHAIN_PASSWORD
+    - MATCH_DEPLOY_KEY: $MATCH_DEPLOY_KEY
+    - APPVEYOR_REPO_TAG_NAME: $APPVEYOR_REPO_TAG_NAME
+    - GITHUB_TOKEN: $(GITHUB_TOKEN)
+  
+  install:
+  - gem install cocoapods
+  - gem install bundler
+  - pip install -r requirements.txt
+  - flutter upgrade --force
+  - bundle install
+  - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG2.cer
+  - git clone https://justinkumpe:${GITHUB_TOKEN}@github.com/kumpeapps/fastlane_certs.git
+  - bundle exec fastlane matchget
+
+  build_script:
+  - echo "is_mobile=0" >> .env
+  - flet build macos --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --include-packages flet_audio
+
+  after_build:
+  - tar -czvf jkuvt-macos.tar.gz -C build/macos "UVT.app"
+
+  artifacts:
+  - path: jkuvt-macos.tar.gz
+
+# #
+# #   iOS package
+# # 
+-
+  matrix:
+    only:
+    - job_name: "build iOS"
+    - SERVICE_TOKEN: $SERVICE_TOKEN
+    - APPVEYOR_BUILD_VERSION: $APPVEYOR_BUILD_VERSION
+    - APPVEYOR_BUILD_NUMBER: $APPVEYOR_BUILD_NUMBER
+    - APPLE_APP_STORE_API_KEY_ID: $APPLE_APP_STORE_API_KEY_ID
+    - APPLE_APPSTORE_API_ISSUER_ID: $APPLE_APPSTORE_API_ISSUER_ID
+    - APPLE_APP_STORE_API_KEY: $APPLE_APP_STORE_API_KEY
+    - FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
+    - FASTLANE_PASSWORD: $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
+    - FASTLANE_USER: "jakumpe@justinkumpe.net"
+    - MATCH_PASSWORD: $MATCH_KEYCHAIN_PASSWORD
+    - MATCH_KEYCHAIN_PASSWORD: $MATCH_KEYCHAIN_PASSWORD
+    - MATCH_DEPLOY_KEY: $MATCH_DEPLOY_KEY
+    - APPVEYOR_REPO_TAG_NAME: $APPVEYOR_REPO_TAG_NAME
+    - GITHUB_TOKEN: $(GITHUB_TOKEN)
+  
+  install:
+  - xcodebuild -downloadPlatform iOS
+  - gem install cocoapods
+  - gem install bundler
+  - pip install -r requirements.txt
+  - flutter upgrade --force
+  - bundle install
+  - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG2.cer
+  - git clone https://justinkumpe:${GITHUB_TOKEN}@github.com/kumpeapps/fastlane_certs.git
+  - bundle exec fastlane matchget
+
+  build_script:
+  - echo "is_mobile=1" >> .env
+  - flet build ipa --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref Kumpe3D_Kiosk --flutter-build-args=--release 
+  # --team 2T42Z3DM34
+
+  after_build:
+  - tar -czvf jkuvt-ios.tar.gz -C build ipa
+  # - xcrun altool --upload-app -t ios -f /build/ipa/jkuvt.ipa -u jakumpe@justinkumpe.net -p $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
+
+  artifacts:
+  - path: jkuvt-ios.tar.gz
+
+#
+#   Android package 
+# 
+-
+  matrix:
+    only:
+    - job_name: "build Android"
+    - SERVICE_TOKEN: $SERVICE_TOKEN
+    - APPVEYOR_BUILD_VERSION: $APPVEYOR_BUILD_VERSION
+    - APPVEYOR_BUILD_NUMBER: $APPVEYOR_BUILD_NUMBER
+    - APPVEYOR_REPO_TAG_NAME: $APPVEYOR_REPO_TAG_NAME
+
+  build_script:
+  - echo "is_mobile=1" >> .env
+  - flet build apk --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --include-packages flet_audio
+
+  after_build:
+  - tar -czvf jkuvt-apk.tar.gz -C build apk
+
+  artifacts:
+  - path: jkuvt-apk.tar.gz

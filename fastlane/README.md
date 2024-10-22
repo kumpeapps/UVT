@@ -15,58 +15,18 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios screenshots
+### ios update_match
 
 ```sh
-[bundle exec] fastlane ios screenshots
+[bundle exec] fastlane ios update_match
 ```
 
-Generate new localized screenshots
-
-### ios beta
-
-```sh
-[bundle exec] fastlane ios beta
-```
-
-Build and upload beta version to testflight
-
-### ios alpha
-
-```sh
-[bundle exec] fastlane ios alpha
-```
-
-Build and upload alpha version to testflight
-
-### ios release
-
-```sh
-[bundle exec] fastlane ios release
-```
-
-Build and upload release version to Apple
+Updates match certificates
 
 ### ios matchget
 
 ```sh
 [bundle exec] fastlane ios matchget
-```
-
-
-
-### ios test
-
-```sh
-[bundle exec] fastlane ios test
-```
-
-
-
-### ios get_metadata
-
-```sh
-[bundle exec] fastlane ios get_metadata
 ```
 
 
