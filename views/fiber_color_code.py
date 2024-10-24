@@ -4,13 +4,12 @@ import flet as ft  # type: ignore
 import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
 
-home = fs.AddPagesy()
+fiber_color_code = fs.AddPagesy()
 
 
-@home.page("/fiber_color_code", title="Fiber Color Code")
-def home_page(data: fs.Datasy):
+@fiber_color_code.page("/fiber_color_code", title="Fiber Color Code")
+def fiber_color_code_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
-    page = data.page
     view = data.view
     image = ft.Image(
         src="../assets/fiber_color-code.jpg",

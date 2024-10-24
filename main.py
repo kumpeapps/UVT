@@ -23,11 +23,20 @@ def view(data: fs.Datasy):
                 ft.PopupMenuButton(
                     items=[
                         ft.PopupMenuItem(
-                            text="🔥 Home", on_click=data.go(data.route_init)
+                            text="Home", on_click=data.go(data.route_init)
                         ),
                         ft.PopupMenuItem(
                             text="RJ45 Wiring Scheme", on_click=data.go("/rj45_scheme")
-                        )
+                        ),
+                        ft.PopupMenuItem(
+                            text="Copper Color Code", on_click=data.go("/copper_color_code")
+                        ),
+                        ft.PopupMenuItem(
+                            text="Fiber Color Code", on_click=data.go("/fiber_color_code")
+                        ),
+                        ft.PopupMenuItem(
+                            text="Static IP Instructions", on_click=data.go("/uv/statics")
+                        ),
                     ]
                 ),
             ],

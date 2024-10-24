@@ -4,11 +4,11 @@ import flet as ft  # type: ignore
 import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
 
-home = fs.AddPagesy()
+copper_color_code = fs.AddPagesy()
 
 
-@home.page("/copper_color_code", title="Copper Color Code")
-def home_page(data: fs.Datasy):
+@copper_color_code.page("/copper_color_code", title="Copper Color Code")
+def copper_color_code_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
     view = data.view
     image = ft.Image(src="../assets/25-pair-color-code.png")

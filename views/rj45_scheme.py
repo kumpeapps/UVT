@@ -4,11 +4,11 @@ import flet as ft  # type: ignore
 import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
 
-home = fs.AddPagesy()
+rj45_scheme = fs.AddPagesy()
 
 
-@home.page("/rj45_scheme", title="RJ45 Wiring Scheme")
-def home_page(data: fs.Datasy):
+@rj45_scheme.page("/rj45_scheme", title="RJ45 Wiring Scheme")
+def rj45_scheme_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
     view = data.view
     image = ft.Image(src="../assets/rj45-wiring-schemes.png")

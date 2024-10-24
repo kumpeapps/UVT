@@ -37,6 +37,15 @@ def home_page(data: fs.Datasy):
         ),
         on_click=lambda e: page.go("/fiber_color_code"),
     )
+    statics = ft.Container(
+        content=ft.Text(
+            "UV Static IP Calc", text_align=ft.TextAlign.CENTER, max_lines=1
+        ),
+        image=ft.DecorationImage(
+            src="https://img.icons8.com/external-vectorslab-glyph-vectorslab/53/external-Network-Setting-machine-learning-vectorslab-glyph-vectorslab-2.png"
+        ),
+        on_click=lambda e: page.go("/fiber_color_code"),
+    )
     images = ft.GridView(
         expand=1,
         runs_count=5,
@@ -48,6 +57,7 @@ def home_page(data: fs.Datasy):
             rj45_container,
             copper_color_code_container,
             fiber_color_code_container,
+            statics,
         ],
     )
 
@@ -56,15 +66,16 @@ def home_page(data: fs.Datasy):
         # border_radius=35,
         # width=400,
         # height=850,
-        content=ft.Stack(controls=[images]),
+        content=ft.Stack(controls=[images], alignment=ft.alignment.center),
+        alignment=ft.alignment.center,
         # padding=50,
     )
     return ft.View(
         controls=[
             container,
         ],
-        vertical_alignment="center",
-        horizontal_alignment="center",
+        vertical_alignment=ft.alignment.center,
+        horizontal_alignment=ft.alignment.center,
         appbar=view.appbar,
         bgcolor=AppColors.BG,
     )
