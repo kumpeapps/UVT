@@ -26,7 +26,7 @@ def home_page(data: fs.Datasy):
         image=ft.DecorationImage(
             src="https://img.icons8.com/color/96/000000/color-palette.png"
         ),
-        on_click=lambda e: page.go("/copper_color_code"),
+        on_click=lambda e: page.go("/copper/color_code"),
     )
     fiber_color_code_container = ft.Container(
         content=ft.Text(
@@ -44,7 +44,7 @@ def home_page(data: fs.Datasy):
         image=ft.DecorationImage(
             src="https://img.icons8.com/external-vectorslab-glyph-vectorslab/53/external-Network-Setting-machine-learning-vectorslab-glyph-vectorslab-2.png"
         ),
-        on_click=lambda e: page.go("/fiber_color_code"),
+        on_click=lambda e: page.go("/uv/statics"),
     )
     images = ft.GridView(
         expand=1,

@@ -29,13 +29,16 @@ def view(data: fs.Datasy):
                             text="RJ45 Wiring Scheme", on_click=data.go("/rj45_scheme")
                         ),
                         ft.PopupMenuItem(
-                            text="Copper Color Code", on_click=data.go("/copper_color_code")
+                            text="Copper Color Code", on_click=data.go("/copper/color_code")
                         ),
                         ft.PopupMenuItem(
                             text="Fiber Color Code", on_click=data.go("/fiber_color_code")
                         ),
                         ft.PopupMenuItem(
                             text="Static IP Instructions", on_click=data.go("/uv/statics")
+                        ),
+                        ft.PopupMenuItem(
+                            text="Copper Pair to Color", on_click=data.go("/copper/pair_to_color")
                         ),
                     ]
                 ),

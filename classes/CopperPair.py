@@ -52,18 +52,18 @@ class CopperPair:
         return self.__tip_hex(self.tip_color)
 
     @staticmethod
-    def __ring(pair) -> str:
+    def __ring(pair: int) -> str:
         """Get Ring Color"""
         match pair:
-            case 1, 6, 11, 16, 21:
+            case 1 | 6 | 11 | 16 | 21:
                 return "blue"
-            case 2, 7, 12, 17, 22:
+            case 2 | 7 | 12 | 17 | 22:
                 return "orange"
-            case 3, 8, 13, 18, 23:
+            case 3 | 8 | 13 | 18 | 23:
                 return "green"
-            case 4, 9, 14, 19, 24:
+            case 4 | 9 | 14 | 19 | 24:
                 return "brown"
-            case 5, 10, 15, 20, 25:
+            case 5 | 10 | 15 | 20 | 25:
                 return "slate"
             case _:
                 return "unknown"

@@ -26,7 +26,7 @@ def statics_page(data: fs.Datasy):
     ip_field = ft.TextField(
         text_align=ft.TextAlign.CENTER,
         max_length=15,
-        keyboard_type=ft.KeyboardType.NUMBER,
+        keyboard_type=ft.KeyboardType.DATETIME,
         autofocus=True,
         helper_text="Start IP Address",
         color=ft.colors.WHITE,
