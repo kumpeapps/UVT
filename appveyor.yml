@@ -1,11 +1,11 @@
 version: '11.0.0({build})'
 environment:
   matrix:
-  - job_name: "build iOS"
-    appveyor_build_worker_image: macOS-Sonoma
-    build: Script
   - job_name: "build Android"
     appveyor_build_worker_image: Ubuntu
+    build: Script
+  - job_name: "build iOS"
+    appveyor_build_worker_image: macOS-Sonoma
     build: Script
   - job_name: "build macOS"
     appveyor_build_worker_image: macOS
