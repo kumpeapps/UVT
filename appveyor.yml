@@ -132,6 +132,7 @@ for:
 
   after_build:
   - tar -czvf jkuvt-ios.tar.gz -C build ipa
+  - bundle exec fastlane ios upload_appstore
   # - xcrun altool --upload-app -t ios -f /build/ipa/jkuvt.ipa -u jakumpe@justinkumpe.net -p $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
 
   artifacts:

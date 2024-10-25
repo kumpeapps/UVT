@@ -54,4 +54,63 @@ platform :ios do
   match(generate_apple_certs: true, type: "development", readonly: is_ci, app_identifier: "net.justinkumpe.apps.jkuvt", git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], git_url: "https://github.com/kumpeapps/fastlane_certs.git")
   match(generate_apple_certs: true, type: "appstore", readonly: is_ci, app_identifier: "net.justinkumpe.apps.jkuvt", git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], git_url: "https://github.com/kumpeapps/fastlane_certs.git")
   end
+
+  desc "Configure Flutter project without building it"
+  lane :config_flutter do
+    update_version
+
+    Dir.chdir "../.." do
+      sh("flutter", "build", "ios", "--release", "--no-codesign", "--config-only")
+    end
+  end
+
+  desc "Build for internal testing"
+  lane :build_ipa do
+    config_flutter
+
+    match(type: "development", readonly: true)
+    match(type: "adhoc", readonly: true)
+
+    gym(
+      export_method: "ad-hoc",
+      output_directory: "../build",
+      output_name: "jkuvt.ipa",
+      xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        provisioningProfiles: { 
+          "net.justinkumpe.apps.jkuvt" => "match AdHoc net.justinkumpe.apps.jkuvt"
+        }
+      }
+    )
+  end
+
+  desc "Upload to App Store"
+  lane :upload_appstore do
+    config_flutter
+
+    match(type: "development", readonly: true)
+    match(type: "appstore", readonly: true)
+
+    gym(
+      export_method: "app-store",
+      output_directory: "../build",
+      output_name: "jkuvt.ipa",
+      xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        provisioningProfiles: { 
+          "net.justinkumpe.apps.jkuvt" => "match AppStore net.justinkumpe.apps.jkuvt"
+        }
+      }
+    )
+
+    app_store_connect_api_key(is_key_content_base64: true)
+    
+    deliver(
+      skip_screenshots: true,
+      skip_metadata: true,
+      run_precheck_before_submit: false,
+      submit_for_review: false,
+      force: true
+    )    
+  end
 end
