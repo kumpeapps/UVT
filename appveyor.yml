@@ -153,7 +153,7 @@ for:
 
   build_script:
   - echo "is_mobile=1" >> .env
-  - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/UVT.jks -o ~/UVT.jks
+  - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/UVT.jks -o /UVT.jks
   - flet build apk --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref UVT
 
   after_build:
