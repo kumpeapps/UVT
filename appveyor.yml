@@ -127,12 +127,12 @@ for:
 
   build_script:
   - echo "is_mobile=1" >> .env
-  - flet build ipa --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref UVT --flutter-build-args=--release 
+  - flet build ipa --project "jkuvt" --team "2T42Z3DM34" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref UVT --flutter-build-args=--release 
   # --team 2T42Z3DM34
 
   after_build:
   - tar -czvf jkuvt-ios.tar.gz -C build ipa
-  - bundle exec fastlane ios upload_appstore
+  # - bundle exec fastlane ios upload_appstore
   # - xcrun altool --upload-app -t ios -f /build/ipa/jkuvt.ipa -u jakumpe@justinkumpe.net -p $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
 
   artifacts:
