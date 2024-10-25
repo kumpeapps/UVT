@@ -31,6 +31,30 @@ Updates match certificates
 
 
 
+### ios config_flutter
+
+```sh
+[bundle exec] fastlane ios config_flutter
+```
+
+Configure Flutter project without building it
+
+### ios build_ipa
+
+```sh
+[bundle exec] fastlane ios build_ipa
+```
+
+Build for internal testing
+
+### ios upload_appstore
+
+```sh
+[bundle exec] fastlane ios upload_appstore
+```
+
+Upload to App Store
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
