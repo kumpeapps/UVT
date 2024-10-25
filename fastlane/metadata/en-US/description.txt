@@ -1,1 +1,0 @@
-UV Trainer provides notes on 25 pair copper color code, fiber optic color code, and RJ-45 wiring scheme.  This app will also walk you thru setting up static IP addressing on a uverse gateway.

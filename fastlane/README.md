@@ -15,37 +15,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios screenshots
+### ios update_match
 
 ```sh
-[bundle exec] fastlane ios screenshots
+[bundle exec] fastlane ios update_match
 ```
 
-Generate new localized screenshots
-
-### ios beta
-
-```sh
-[bundle exec] fastlane ios beta
-```
-
-Build and upload beta version to testflight
-
-### ios alpha
-
-```sh
-[bundle exec] fastlane ios alpha
-```
-
-Build and upload alpha version to testflight
-
-### ios release
-
-```sh
-[bundle exec] fastlane ios release
-```
-
-Build and upload release version to Apple
+Updates match certificates
 
 ### ios matchget
 
@@ -55,21 +31,29 @@ Build and upload release version to Apple
 
 
 
-### ios test
+### ios config_flutter
 
 ```sh
-[bundle exec] fastlane ios test
+[bundle exec] fastlane ios config_flutter
 ```
 
+Configure Flutter project without building it
 
-
-### ios get_metadata
+### ios build_ipa
 
 ```sh
-[bundle exec] fastlane ios get_metadata
+[bundle exec] fastlane ios build_ipa
 ```
 
+Build for internal testing
 
+### ios upload_appstore
+
+```sh
+[bundle exec] fastlane ios upload_appstore
+```
+
+Upload to App Store
 
 ----
 
