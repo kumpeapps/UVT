@@ -38,7 +38,10 @@ def view(data: fs.Datasy):
                             text="Static IP Instructions", on_click=data.go("/uv/statics")
                         ),
                         ft.PopupMenuItem(
-                            text="Copper Pair to Color", on_click=data.go("/copper/pair_to_color")
+                            text="Copper Pair Calculator", on_click=data.go("/copper/pair_to_color")
+                        ),
+                        ft.PopupMenuItem(
+                            text="Distance Calculator", on_click=data.go("/distance_calc")
                         ),
                     ]
                 ),

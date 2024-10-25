@@ -16,7 +16,7 @@ def home_page(data: fs.Datasy):
         content=ft.Text(
             "RJ45 Wiring Scheme", text_align=ft.TextAlign.CENTER, max_lines=1, size=11
         ),
-        image=ft.DecorationImage(src="https://img.icons8.com/color/96/000000/rj45.png"),
+        image=ft.DecorationImage(src="https://img.icons8.com/color/62/000000/rj45.png"),
         on_click=lambda e: page.go("/rj45_scheme"),
     )
     copper_color_code_container = ft.Container(
@@ -24,7 +24,7 @@ def home_page(data: fs.Datasy):
             "Copper Color Code", text_align=ft.TextAlign.CENTER, max_lines=1, size=12
         ),
         image=ft.DecorationImage(
-            src="https://img.icons8.com/color/96/000000/color-palette.png"
+            src="https://img.icons8.com/color/62/000000/color-palette.png"
         ),
         on_click=lambda e: page.go("/copper/color_code"),
     )
@@ -33,7 +33,7 @@ def home_page(data: fs.Datasy):
             "Fiber Color Code", text_align=ft.TextAlign.CENTER, max_lines=1
         ),
         image=ft.DecorationImage(
-            src="https://img.icons8.com/color/96/000000/color-palette.png"
+            src="https://img.icons8.com/color/62/000000/color-palette.png"
         ),
         on_click=lambda e: page.go("/fiber_color_code"),
     )
@@ -42,9 +42,28 @@ def home_page(data: fs.Datasy):
             "UV Static IP Calc", text_align=ft.TextAlign.CENTER, max_lines=1
         ),
         image=ft.DecorationImage(
-            src="https://img.icons8.com/external-vectorslab-glyph-vectorslab/53/external-Network-Setting-machine-learning-vectorslab-glyph-vectorslab-2.png"
+            src="https://img.icons8.com/external-vectorslab-glyph-vectorslab/62/"
+            "external-Network-Setting-machine-learning-vectorslab-glyph-vectorslab-2.png"
         ),
         on_click=lambda e: page.go("/uv/statics"),
+    )
+    copper_pair_calc = ft.Container(
+        content=ft.Text(
+            "Copper Pair Calc", text_align=ft.TextAlign.CENTER, max_lines=1
+        ),
+        image=ft.DecorationImage(
+            src="https://img.icons8.com/color/62/apple-calculator.png"
+        ),
+        on_click=lambda e: page.go("/uv/statics"),
+    )
+    distance_calc = ft.Container(
+        content=ft.Text(
+            "Distance Calc", text_align=ft.TextAlign.CENTER, max_lines=1
+        ),
+        image=ft.DecorationImage(
+            src="https://img.icons8.com/color/62/apple-calculator.png"
+        ),
+        on_click=lambda e: page.go("/distance_calc"),
     )
     images = ft.GridView(
         expand=1,
@@ -58,6 +77,8 @@ def home_page(data: fs.Datasy):
             copper_color_code_container,
             fiber_color_code_container,
             statics,
+            copper_pair_calc,
+            distance_calc,
         ],
     )
 
