@@ -54,7 +54,7 @@ def home_page(data: fs.Datasy):
         image=ft.DecorationImage(
             src="https://img.icons8.com/color/62/apple-calculator.png"
         ),
-        on_click=lambda e: page.go("/uv/statics"),
+        on_click=lambda e: page.go("/copper/pair_to_color"),
     )
     distance_calc = ft.Container(
         content=ft.Text(

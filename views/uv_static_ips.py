@@ -31,6 +31,7 @@ def statics_page(data: fs.Datasy):
         helper_text="Start IP Address",
         color=ft.colors.WHITE,
         border_color=ft.colors.WHITE,
+        width=200,
     )
     block_size_field = ft.Dropdown(
         options=[
@@ -43,6 +44,9 @@ def statics_page(data: fs.Datasy):
         value=8,
         alignment=ft.alignment.center,
         color=ft.colors.WHITE,
+        fill_color=AppColors.BG,
+        focused_color=ft.colors.BLACK,
+        width=200,
     )
     submit_button = ft.ElevatedButton(text="Submit", on_click=lambda e: submit())
     container = ft.Container(

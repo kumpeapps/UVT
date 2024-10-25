@@ -34,14 +34,19 @@ def copper_color_code_page(data: fs.Datasy):
     )
 
 
-@copper.page("/pair_to_color/{pair}", title="Copper Color To Pair")
 @copper.page("/pair_to_color", title="Copper Color To Pair")
-def copper_pair_to_color_page(data: fs.Datasy, pair=""):
+def copper_pair_to_color_page(data: fs.Datasy):
     """Copper Pair to Color Page"""
 
     def changed_pair():
         """Changed Pair"""
-        data.page.go(f"/copper/pair_to_color/{pair_field.value}")
+        pair_data = CopperPair(int(pair_field.value))
+        pair_info.value = (
+            f"Pair: {pair_data.base_pair} ({pair_data.tip_color}/{pair_data.ring_color})\n"
+            f"Binder: {pair_data.binder} ({pair_data.binder_tip_color}/{pair_data.binder_ring_color})\n"
+            f"Super Binder: {pair_data.super_binder} ({pair_data.super_binder_tip_color}/{pair_data.super_binder_ring_color})\n"
+        )
+        data.page.update()
 
     view = data.view
     title = ft.Text(
@@ -57,26 +62,14 @@ def copper_pair_to_color_page(data: fs.Datasy, pair=""):
         color=ft.colors.WHITE,
         border_color=ft.colors.WHITE,
         width=100,
-        value=pair,
         on_change=lambda e: changed_pair(),
     )
-    if pair == "":
-        pair_info = ft.Text(
-            (""),
-            text_align=ft.alignment.center,
-            color=ft.colors.WHITE,
-        )
-    else:
-        pair_data = CopperPair(int(pair))
-        pair_info = ft.Text(
-            (
-                f"Pair: {pair_data.base_pair} ({pair_data.tip_color}/{pair_data.ring_color})\n"
-                f"Binder: {pair_data.binder} ({pair_data.binder_tip_color}/{pair_data.binder_ring_color})\n"
-                f"Super Binder: {pair_data.super_binder} ({pair_data.super_binder_tip_color}/{pair_data.super_binder_ring_color})\n"
-            ),
-            text_align=ft.alignment.center,
-            color=ft.colors.WHITE,
-        )
+
+    pair_info = ft.Text(
+        "",
+        text_align=ft.alignment.center,
+        color=ft.colors.WHITE,
+    )
 
     container = ft.Container(
         bgcolor=AppColors.BG,
