@@ -1,9 +1,9 @@
 version: '11.0.0({build})'
 environment:
   matrix:
-  - job_name: "build Android"
-    appveyor_build_worker_image: Ubuntu
-    build: Script
+  # - job_name: "build Android"
+  #   appveyor_build_worker_image: Ubuntu
+  #   build: Script
   - job_name: "build Android AAB"
     appveyor_build_worker_image: Ubuntu
     build: Script
