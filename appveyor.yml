@@ -137,7 +137,7 @@ for:
 
   after_build:
   - tar -czvf kumpe3dkiosk-ios.tar.gz -C build ipa
-  # - xcrun altool --upload-app -t ios -f /build/ipa/kumpe3dkiosk.ipa -u jakumpe@justinkumpe.net -p $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
+  # - xcrun altool --upload-app -t ios -f  /build/ipa/kumpe3dkiosk.ipa -u jakumpe@justinkumpe.net -p $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
 
   artifacts:
   - path: kumpe3dkiosk-ios.tar.gz
