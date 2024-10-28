@@ -1,20 +1,17 @@
-version: '11.0.0({build})'
+version: '2.2.1({build})'
 environment:
   matrix:
-  - job_name: "build Web"
-    appveyor_build_worker_image: macOS
-    build: Script
   - job_name: "build Android"
     appveyor_build_worker_image: Ubuntu
     build: Script
   - job_name: "build Android AAB"
     appveyor_build_worker_image: Ubuntu
     build: Script
-  - job_name: "build iOS"
-    appveyor_build_worker_image: macOS-Sonoma
-    build: Script
   - job_name: "build macOS"
     appveyor_build_worker_image: macOS
+    build: Script
+  - job_name: "build iOS"
+    appveyor_build_worker_image: macOS-Sonoma
     build: Script
 
 #  skip_branch_with_pr: true
@@ -49,12 +46,12 @@ for:
 #     - image: Visual Studio 2019
     
 #   build_script:
-#   - flet build windows --project "jkuvt" --product "UVT" --build-version "1.0.0" --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+#   - flet build windows --project "kumpe3dkiosk" --product "Kumpe3D Kiosk" --build-version "1.0.0" --copyright "Copyright (c) 2024 KumpeApps LLC" --org com.kumpeapps.flet --company "KumpeApps LLC"
 #   after_build:
-#   - 7z a jkuvt-windows.zip %CD%\build\windows\*.exe
+#   - 7z a kumpe3dkiosk-windows.zip %CD%\build\windows\*.exe
 
 #   artifacts:
-#   - path: jkuvt-windows.zip
+#   - path: kumpe3dkiosk-windows.zip
 
 #
 #   macOS package
@@ -84,19 +81,20 @@ for:
   - pip install -r requirements.txt
   - flutter upgrade --force
   - bundle install
+  - bundle update fastlane
   - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG2.cer
   - git clone https://justinkumpe:${GITHUB_TOKEN}@github.com/kumpeapps/fastlane_certs.git
   - bundle exec fastlane matchget
 
   build_script:
   - echo "is_mobile=0" >> .env
-  - flet build macos --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+  - flet build macos --project "kumpe3dkiosk" --product "Kumpe3D Kiosk" --build-version "${APPVEYOR_REPO_TAG_NAME:-"2.2.1"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org com.kumpeapps.flet --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref Kumpe3D_Kiosk
 
   after_build:
-  - tar -czvf jkuvt-macos.tar.gz -C build/macos "UVT.app"
+  - tar -czvf kumpe3dkiosk-macos.tar.gz -C build/macos "Kumpe3D Kiosk.app"
 
   artifacts:
-  - path: jkuvt-macos.tar.gz
+  - path: kumpe3dkiosk-macos.tar.gz
 
 # #
 # #   iOS package
@@ -127,22 +125,22 @@ for:
   - pip install -r requirements.txt
   - flutter upgrade --force
   - bundle install
+  - bundle update fastlane
   - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG2.cer
   - git clone https://justinkumpe:${GITHUB_TOKEN}@github.com/kumpeapps/fastlane_certs.git
   - bundle exec fastlane matchget
 
   build_script:
   - echo "is_mobile=1" >> .env
-  - flet build ipa --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --template https://github.com/kumpeapps/flet-build-template.git --template-ref UVT --flutter-build-args=--release 
+  - flet build ipa --project "kumpe3dkiosk" --product "Kumpe3D Kiosk" --build-version "${APPVEYOR_REPO_TAG_NAME:-"2.2.1"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org com.kumpeapps.flet --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref Kumpe3D_Kiosk --flutter-build-args=--release 
   # --team 2T42Z3DM34
 
   after_build:
-  - tar -czvf jkuvt-ios.tar.gz -C build ipa
-  # - bundle exec fastlane ios upload_appstore
-  # - xcrun altool --upload-app -t ios -f /build/ipa/jkuvt.ipa -u jakumpe@justinkumpe.net -p $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
+  - tar -czvf kumpe3dkiosk-ios.tar.gz -C build ipa
+  # - xcrun altool --upload-app -t ios -f /build/ipa/kumpe3dkiosk.ipa -u jakumpe@justinkumpe.net -p $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
 
   artifacts:
-  - path: jkuvt-ios.tar.gz
+  - path: kumpe3dkiosk-ios.tar.gz
 
 #
 #   Android package 
@@ -155,21 +153,20 @@ for:
     - APPVEYOR_BUILD_VERSION: $APPVEYOR_BUILD_VERSION
     - APPVEYOR_BUILD_NUMBER: $APPVEYOR_BUILD_NUMBER
     - APPVEYOR_REPO_TAG_NAME: $APPVEYOR_REPO_TAG_NAME
-    - MATCH_DEPLOY_KEY: $MATCH_DEPLOY_KEY
 
   build_script:
   - echo "is_mobile=1" >> .env
-  - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/UVT.jks -o /tmp/UVT.jks
-  - flet build apk --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --template https://github.com/kumpeapps/flet-build-template.git --template-ref UVT
+  - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/kumpe3dkiosk -o /tmp/kumpe3dkiosk
+  - flet build apk --project "kumpe3dkiosk" --product "Kumpe3D Kiosk" --build-version "${APPVEYOR_REPO_TAG_NAME:-"2.2.1"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org com.kumpeapps.flet --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref Kumpe3D_Kiosk
 
   after_build:
-  - tar -czvf jkuvt-apk.tar.gz -C build apk
+  - tar -czvf kumpe3dkiosk-apk.tar.gz -C build apk
 
   artifacts:
-  - path: jkuvt-apk.tar.gz
+  - path: kumpe3dkiosk-apk.tar.gz
 
 #
-#   Android package 
+#   Android package AAB
 # 
 -
   matrix:
@@ -179,37 +176,14 @@ for:
     - APPVEYOR_BUILD_VERSION: $APPVEYOR_BUILD_VERSION
     - APPVEYOR_BUILD_NUMBER: $APPVEYOR_BUILD_NUMBER
     - APPVEYOR_REPO_TAG_NAME: $APPVEYOR_REPO_TAG_NAME
-    - MATCH_DEPLOY_KEY: $MATCH_DEPLOY_KEY
 
   build_script:
   - echo "is_mobile=1" >> .env
-  - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/UVT.jks -o /tmp/UVT.jks
-  - flet build aab --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --template https://github.com/kumpeapps/flet-build-template.git --template-ref UVT
+  - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/kumpe3dkiosk -o /tmp/kumpe3dkiosk
+  - flet build aab --project "kumpe3dkiosk" --product "Kumpe3D Kiosk" --build-version "${APPVEYOR_REPO_TAG_NAME:-"2.2.1"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org com.kumpeapps.flet --company "KumpeApps LLC" --include-packages flet_audio --template https://github.com/kumpeapps/flet-build-template.git --template-ref Kumpe3D_Kiosk
 
   after_build:
-  - tar -czvf jkuvt-aab.tar.gz -C build aab
+  - tar -czvf kumpe3dkiosk-aab.tar.gz -C build aab
 
   artifacts:
-  - path: jkuvt-aab.tar.gz#
-
-#
-#   Static Web Package
-# 
--
-  matrix:
-    only:
-    - job_name: "build Web"
-    - SERVICE_TOKEN: $SERVICE_TOKEN
-    - APPVEYOR_BUILD_VERSION: $APPVEYOR_BUILD_VERSION
-    - APPVEYOR_BUILD_NUMBER: $APPVEYOR_BUILD_NUMBER
-    - APPVEYOR_REPO_TAG_NAME: $APPVEYOR_REPO_TAG_NAME
-    - MATCH_DEPLOY_KEY: $MATCH_DEPLOY_KEY
-
-  build_script:
-  - flet build web --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.0"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2024 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC" --template https://github.com/kumpeapps/flet-build-template.git --template-ref UVT
-
-  after_build:
-  - tar -czvf jkuvt-web.tar.gz -C build web
-
-  artifacts:
-  - path: jkuvt-web.tar.gz
+  - path: kumpe3dkiosk-aab.tar.gz
