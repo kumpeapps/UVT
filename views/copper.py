@@ -12,7 +12,7 @@ copper = fs.AddPagesy(route_prefix="/copper")
 def copper_color_code_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
     view = data.view
-    image = ft.Image(src="../assets/25-pair-color-code.png")
+    image = ft.Image(src="../assets/images/25-pair-color-code.png")
     container = ft.Container(
         bgcolor=AppColors.BG,
         # border_radius=35,
