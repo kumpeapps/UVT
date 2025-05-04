@@ -11,7 +11,7 @@ rj45_scheme = fs.AddPagesy()
 def rj45_scheme_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
     view = data.view
-    image = ft.Image(src="../assets/rj45-wiring-schemes.png")
+    image = ft.Image(src="../assets/images/rj45-wiring-schemes.png")
     container = ft.Container(
         bgcolor=AppColors.BG,
         # border_radius=35,

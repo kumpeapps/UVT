@@ -21,7 +21,7 @@ def statics_page(data: fs.Datasy):
     title = ft.Text(
         value="Static IP Instructions",
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
     ip_field = ft.TextField(
         text_align=ft.TextAlign.CENTER,
@@ -29,8 +29,8 @@ def statics_page(data: fs.Datasy):
         keyboard_type=ft.KeyboardType.DATETIME,
         autofocus=True,
         helper_text="Start IP Address",
-        color=ft.colors.WHITE,
-        border_color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
+        border_color=ft.Colors.WHITE,
         width=200,
     )
     block_size_field = ft.Dropdown(
@@ -43,9 +43,9 @@ def statics_page(data: fs.Datasy):
         helper_text="Block Size",
         value=8,
         alignment=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
         fill_color=AppColors.BG,
-        focused_color=ft.colors.BLACK,
+        focused_color=ft.Colors.BLACK,
         width=200,
     )
     submit_button = ft.ElevatedButton(text="Submit", on_click=lambda e: submit())
@@ -91,7 +91,7 @@ def statics_info_page(data: fs.Datasy):
     title = ft.Text(
         value="Uverse Static IP Instructions",
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
     statics_info = ft.Text(
         (
@@ -103,7 +103,7 @@ def statics_info_page(data: fs.Datasy):
             f"Secondary DNS: {ip_network.att_secondary_dns}"
         ),
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
     aaris = ft.ElevatedButton(
         text="AARIS RG Instructions", on_click=lambda e: submit_aaris()
@@ -156,7 +156,7 @@ def statics_info_aaris_page(data: fs.Datasy):
     title = ft.Text(
         value="Uverse Static IP Instructions\nAARIS Gateway Instructions",
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
     statics_info = ft.Text(
         (
@@ -173,7 +173,7 @@ def statics_info_aaris_page(data: fs.Datasy):
             "11. Click Save"
         ),
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
     pace = ft.ElevatedButton(
         text="PACE RG Instructions", on_click=lambda e: submit_pace()
@@ -223,7 +223,7 @@ def statics_info_pace_page(data: fs.Datasy):
     title = ft.Text(
         value="Uverse Static IP Instructions\nPACE Gateway Instructions",
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
     statics_info = ft.Text(
         (
@@ -239,7 +239,7 @@ def statics_info_pace_page(data: fs.Datasy):
             "10. Click Save"
         ),
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
     pace = ft.ElevatedButton(
         text="AARIS RG Instructions", on_click=lambda e: submit_aaris()

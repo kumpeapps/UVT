@@ -12,7 +12,7 @@ copper = fs.AddPagesy(route_prefix="/copper")
 def copper_color_code_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
     view = data.view
-    image = ft.Image(src="../assets/25-pair-color-code.png")
+    image = ft.Image(src="../assets/images/25-pair-color-code.png")
     container = ft.Container(
         bgcolor=AppColors.BG,
         # border_radius=35,
@@ -52,15 +52,15 @@ def copper_pair_to_color_page(data: fs.Datasy):
     title = ft.Text(
         value="Copper Pair Calculator",
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
     pair_field = ft.TextField(
         text_align=ft.TextAlign.CENTER,
         keyboard_type=ft.KeyboardType.NUMBER,
         autofocus=True,
         helper_text="Pair Number",
-        color=ft.colors.WHITE,
-        border_color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
+        border_color=ft.Colors.WHITE,
         width=100,
         on_change=lambda e: changed_pair(),
     )
@@ -68,7 +68,7 @@ def copper_pair_to_color_page(data: fs.Datasy):
     pair_info = ft.Text(
         "",
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
 
     container = ft.Container(

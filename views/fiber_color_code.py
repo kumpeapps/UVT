@@ -12,7 +12,7 @@ def fiber_color_code_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
     view = data.view
     image = ft.Image(
-        src="../assets/fiber_color-code.jpg",
+        src="../assets/images/fiber_color-code.jpg",
         fit=ft.ImageFit.FIT_WIDTH,
     )
     container = ft.Container(

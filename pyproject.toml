@@ -1,0 +1,47 @@
+[project]
+name = "jkuvt"
+description = "UVT"
+authors = [
+  {name = "Justin Kumpe", email = "jakumpe@kumpeapps.com"}
+]
+
+
+dependencies = [
+    "flet==0.27.6",
+    "PyMySQL==1.1.1",
+    "python-dotenv==1.0.1",
+    "parse==1.20.1",
+    "chardet==5.2.0",
+    "flet-easy==0.2.9",
+  ]
+
+[tool.flet]
+org = "net.justinkumpe.apps" # --org
+product = "UVT" # --product
+company = "KumpeApps LLC" # --company
+copyright = "Copyright (C) 2025 by KumpeApps LLC" # --copyright
+
+[tool.flet.ios]
+team = "2T42Z3DM34"
+
+[tool.flet.android.signing]
+# store and key passwords can be passed with `--android-signing-key-store-password`
+# and `--android-signing-key-password` options or
+# FLET_ANDROID_SIGNING_KEY_STORE_PASSWORD
+# and FLET_ANDROID_SIGNING_KEY_PASSWORD environment variables.
+key_store = "/tmp/UVT.jks" # --android-signing-key-store
+key_alias = "upload" # --android-signing-key-alias
+
+[tool.flet.android.permission]
+"android.permission.INTERNET" = true
+"android.permission.READ_MEDIA_AUDIO" = true
+"android.permission.READ_EXTERNAL_STORAGE" = true
+"android.permission.WRITE_EXTERNAL_STORAGE" = true
+"android.permission.FOREGROUND_SERVICE" = true
+"android.permission.FOREGROUND_SERVICE_LOCATION" = true
+"android.permission.POST_NOTIFICATIONS" = true
+"android.permission.ACCEPT_HANDOVER" = true
+
+[tool.flet.android.feature]
+"android.software.leanback" = false
+"android.hardware.touchscreen" = false
