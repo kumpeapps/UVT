@@ -15,7 +15,7 @@ def distance_calc_page(data: fs.Datasy):
     title = ft.Text(
         value="Distance Calculator",
         text_align=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
     )
     text = ft.Text("")
     conversion_units = ft.Dropdown(
@@ -25,7 +25,7 @@ def distance_calc_page(data: fs.Datasy):
         ],
         value="Miles to Feet",
         alignment=ft.alignment.center,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
         width=100,
         on_change=lambda e: changed_value(),
     )
@@ -46,8 +46,8 @@ def distance_calc_page(data: fs.Datasy):
         keyboard_type=ft.KeyboardType.NUMBER,
         autofocus=True,
         helper_text="Pair Number",
-        color=ft.colors.WHITE,
-        border_color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
+        border_color=ft.Colors.WHITE,
         width=100,
         on_change=lambda e: changed_value(),
     )

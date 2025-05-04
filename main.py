@@ -1,9 +1,14 @@
 """UVT Main"""
 
 from pathlib import Path
+import os
 import flet as ft  # type: ignore
 import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
+
+# Fix for Flet 0.27.6 compatibility
+# Set environment variable to handle the flet_desktop version issue
+os.environ["FLET_VIEW_PATH"] = ""
 
 app = fs.FletEasy(
     route_init="/home",
@@ -18,7 +23,7 @@ def view(data: fs.Datasy):
         appbar=ft.AppBar(
             title=ft.Text("UVT"),
             center_title=True,
-            bgcolor=ft.colors.SURFACE_VARIANT,
+            bgcolor=ft.Colors.ON_SURFACE_VARIANT,
             actions=[
                 ft.PopupMenuButton(
                     items=[
