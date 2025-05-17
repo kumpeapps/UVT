@@ -37,8 +37,6 @@ key_alias = "upload" # --android-signing-key-alias
 "android.permission.READ_MEDIA_AUDIO" = true
 "android.permission.READ_EXTERNAL_STORAGE" = true
 "android.permission.WRITE_EXTERNAL_STORAGE" = true
-"android.permission.FOREGROUND_SERVICE" = true
-"android.permission.FOREGROUND_SERVICE_LOCATION" = true
 "android.permission.POST_NOTIFICATIONS" = true
 "android.permission.ACCEPT_HANDOVER" = true
 

@@ -187,6 +187,8 @@ for:
   - flet build aab --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.4"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2025 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
 
   after_build:
+  - zip -d /build/aab/app-release.aab META-INF/\*
+  - jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore /tmp/UVT.jks /build/aab/app-release.aab upload -storepass $MATCH_DEPLOY_KEY -keypass $MATCH_DEPLOY_KEY
   - tar -czvf jkuvt-aab.tar.gz -C build aab
 
   artifacts:
