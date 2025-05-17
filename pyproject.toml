@@ -35,7 +35,6 @@ key_alias = "upload" # --android-signing-key-alias
 [tool.flet.android.permission]
 "android.permission.INTERNET" = true
 "android.permission.READ_MEDIA_AUDIO" = true
-"android.permission.READ_EXTERNAL_STORAGE" = true
 "android.permission.POST_NOTIFICATIONS" = true
 "android.permission.ACCEPT_HANDOVER" = true
 
