@@ -1,30 +1,30 @@
 """UVT Home"""
 
 import flet as ft  # type: ignore
-import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
+from views import flet_easy as fs  # type: ignore
 
 copper = fs.AddPagesy()
 
 
-@copper.page("/distance_calc", title="Distance Calculator")
+@copper.page("/distance_calc")
 def distance_calc_page(data: fs.Datasy):
     """Distance Calculator Page"""
 
     view = data.view
     title = ft.Text(
         value="Distance Calculator",
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
     text = ft.Text("")
     conversion_units = ft.Dropdown(
         options=[
-            ft.dropdown.Option("Miles to Feet", alignment=ft.alignment.center),
-            ft.dropdown.Option("Feet to Miles", alignment=ft.alignment.center),
+            ft.dropdown.Option("Miles to Feet", alignment=ft.Alignment(0, 0)),
+            ft.dropdown.Option("Feet to Miles", alignment=ft.Alignment(0, 0)),
         ],
         value="Miles to Feet",
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment(0, 0),
         color=ft.Colors.WHITE,
         width=100,
         on_change=lambda e: changed_value(),
@@ -68,7 +68,7 @@ def distance_calc_page(data: fs.Datasy):
             ]
         ),
         # padding=50,
-        alignment=ft.alignment.top_center,
+        alignment=ft.Alignment(0, -1),
     )
 
     return ft.View(

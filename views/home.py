@@ -1,13 +1,13 @@
 """UVT Home"""
 
 import flet as ft  # type: ignore
-import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
+from views import flet_easy as fs  # type: ignore
 
 home = fs.AddPagesy()
 
 
-@home.page("/home", title="Home")
+@home.page("/home")
 def home_page(data: fs.Datasy):
     """Home Page"""
     view = data.view
@@ -86,16 +86,16 @@ def home_page(data: fs.Datasy):
         # border_radius=35,
         # width=400,
         # height=850,
-        content=ft.Stack(controls=[images], alignment=ft.alignment.center),
-        alignment=ft.alignment.center,
+        content=ft.Stack(controls=[images], alignment=ft.Alignment(0, 0)),
+        alignment=ft.Alignment(0, 0),
         # padding=50,
     )
     return ft.View(
         controls=[
             container,
         ],
-        vertical_alignment=ft.alignment.center,
-        horizontal_alignment=ft.alignment.center,
+        vertical_alignment="center",
+        horizontal_alignment="center",
         appbar=view.appbar,
         bgcolor=AppColors.BG,
     )

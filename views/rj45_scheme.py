@@ -1,13 +1,13 @@
 """UVT Home"""
 
 import flet as ft  # type: ignore
-import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
+from views import flet_easy as fs  # type: ignore
 
 rj45_scheme = fs.AddPagesy()
 
 
-@rj45_scheme.page("/rj45_scheme", title="RJ45 Wiring Scheme")
+@rj45_scheme.page("/rj45_scheme")
 def rj45_scheme_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
     view = data.view
@@ -19,7 +19,7 @@ def rj45_scheme_page(data: fs.Datasy):
         # height=850,
         content=ft.Stack(controls=[image]),
         # padding=50,
-        alignment=ft.alignment.top_center,
+        alignment=ft.Alignment(0, -1),
     )
     return ft.View(
         controls=[

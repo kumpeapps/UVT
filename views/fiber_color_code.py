@@ -1,13 +1,13 @@
 """UVT Home"""
 
 import flet as ft  # type: ignore
-import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
+from views import flet_easy as fs  # type: ignore
 
 fiber_color_code = fs.AddPagesy()
 
 
-@fiber_color_code.page("/fiber_color_code", title="Fiber Color Code")
+@fiber_color_code.page("/fiber_color_code")
 def fiber_color_code_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
     view = data.view
@@ -22,7 +22,7 @@ def fiber_color_code_page(data: fs.Datasy):
         # height=850,
         content=ft.Stack(controls=[image]),
         # padding=50,
-        alignment=ft.alignment.top_center
+        alignment=ft.Alignment(0, -1)
     )
     return ft.View(
         controls=[
