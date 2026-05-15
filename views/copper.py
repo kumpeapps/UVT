@@ -1,14 +1,14 @@
 """UVT Home"""
 
 import flet as ft  # type: ignore
-import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
 from classes.CopperPair import CopperPair
+from views import flet_easy as fs  # type: ignore
 
 copper = fs.AddPagesy(route_prefix="/copper")
 
 
-@copper.page("/color_code", title="Copper Color Code")
+@copper.page("/color_code")
 def copper_color_code_page(data: fs.Datasy):
     """RJ45 Scheme Page"""
     view = data.view
@@ -20,7 +20,7 @@ def copper_color_code_page(data: fs.Datasy):
         # height=850,
         content=ft.Stack(controls=[image]),
         # padding=50,
-        alignment=ft.alignment.top_center,
+        alignment=ft.Alignment(0, -1),
     )
     return ft.View(
         controls=[
@@ -34,7 +34,7 @@ def copper_color_code_page(data: fs.Datasy):
     )
 
 
-@copper.page("/pair_to_color", title="Copper Color To Pair")
+@copper.page("/pair_to_color")
 def copper_pair_to_color_page(data: fs.Datasy):
     """Copper Pair to Color Page"""
 
@@ -51,7 +51,7 @@ def copper_pair_to_color_page(data: fs.Datasy):
     view = data.view
     title = ft.Text(
         value="Copper Pair Calculator",
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
     pair_field = ft.TextField(
@@ -67,7 +67,7 @@ def copper_pair_to_color_page(data: fs.Datasy):
 
     pair_info = ft.Text(
         "",
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
 
@@ -86,7 +86,7 @@ def copper_pair_to_color_page(data: fs.Datasy):
             ]
         ),
         # padding=50,
-        alignment=ft.alignment.top_center,
+        alignment=ft.Alignment(0, -1),
     )
 
     return ft.View(

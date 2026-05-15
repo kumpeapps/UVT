@@ -2,7 +2,7 @@ version: '11.0.3({build})'
 environment:
   matrix:
   - job_name: "build Web"
-    appveyor_build_worker_image: macOS
+    appveyor_build_worker_image: macos-sonoma
     build: Script
   - job_name: "build Android"
     appveyor_build_worker_image: Ubuntu
@@ -11,10 +11,10 @@ environment:
     appveyor_build_worker_image: Ubuntu
     build: Script
   # - job_name: "build iOS"
-  #   appveyor_build_worker_image: macOS-Sonoma
+  #   appveyor_build_worker_image: macos-sonoma
   #   build: Script
   # - job_name: "build macOS"
-  #   appveyor_build_worker_image: macOS
+  #   appveyor_build_worker_image: macos-sonoma
   #   build: Script
 
 #  skip_branch_with_pr: true
@@ -161,12 +161,15 @@ for:
   - echo "is_mobile=1" >> .env
   - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/UVT.jks -o /tmp/UVT.jks
   - flet build apk --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.3"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
-
-  after_build:
-  - tar -czvf jkuvt-apk.tar.gz -C build apk
+  - mkdir -p artifacts
+  - find build -type f -name "*.apk" -print
+  - APK_PATH=$(find build -type f -name "*.apk" | head -n 1); if [ -z "$APK_PATH" ]; then echo "No APK artifact found under build/."; find build -maxdepth 4 -type d -print; exit 1; fi
+  - cp "$APK_PATH" artifacts/jkuvt.apk
+  - ls -lh artifacts/jkuvt.apk
 
   artifacts:
-  - path: jkuvt-apk.tar.gz
+  - path: artifacts/jkuvt.apk
+    name: android-apk
 
 #
 #   Android package 
@@ -185,12 +188,15 @@ for:
   - echo "is_mobile=1" >> .env
   - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/UVT.jks -o /tmp/UVT.jks
   - flet build aab --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.3"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
-
-  after_build:
-  - tar -czvf jkuvt-aab.tar.gz -C build aab
+  - mkdir -p artifacts
+  - find build -type f -name "*.aab" -print
+  - AAB_PATH=$(find build -type f -name "*.aab" | head -n 1); if [ -z "$AAB_PATH" ]; then echo "No AAB artifact found under build/."; find build -maxdepth 4 -type d -print; exit 1; fi
+  - cp "$AAB_PATH" artifacts/jkuvt.aab
+  - ls -lh artifacts/jkuvt.aab
 
   artifacts:
-  - path: jkuvt-aab.tar.gz
+  - path: artifacts/jkuvt.aab
+    name: android-aab
 
 #
 #   Static Web Package

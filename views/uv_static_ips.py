@@ -1,26 +1,44 @@
 """UVT Home"""
 
 import flet as ft  # type: ignore
-import flet_easy as fs  # type: ignore
 from assets.app_colors import AppColors
 from classes.IP import IP
+from views import flet_easy as fs  # type: ignore
 
 statics = fs.AddPagesy(route_prefix="/uv/statics")
 
 
-@statics.page("/", title="Static IP Instructions", share_data=True, page_clear=True)
+@statics.page("/", share_data=True, page_clear=True)
 def statics_page(data: fs.Datasy):
     """Static IP Page"""
 
     def submit():
         """Submit"""
-        data.share.set("ip_network", IP.Network(ip_field.value, block_size_field.value))
-        data.page.go("/uv/statics/info")
+        ip_input = (ip_field.value or "").strip()
+        if not ip_input:
+            ip_field.error_text = "Start IP Address is required"
+            data.page.update()
+            return
+
+        block_size_input = block_size_field.value
+        if block_size_input is None:
+            block_size_field.error_text = "Block Size is required"
+            data.page.update()
+            return
+
+        try:
+            ip_field.error_text = None
+            block_size_field.error_text = None
+            data.share.set("ip_network", IP.Network(ip_input, block_size_input))
+            data.page.go("/uv/statics/info")
+        except ValueError:
+            ip_field.error_text = "Enter a valid IPv4 address"
+            data.page.update()
 
     view = data.view
     title = ft.Text(
         value="Static IP Instructions",
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
     ip_field = ft.TextField(
@@ -35,14 +53,14 @@ def statics_page(data: fs.Datasy):
     )
     block_size_field = ft.Dropdown(
         options=[
-            ft.dropdown.Option(8, alignment=ft.alignment.center),
-            ft.dropdown.Option(16, alignment=ft.alignment.center),
-            ft.dropdown.Option(32, alignment=ft.alignment.center),
-            ft.dropdown.Option(64, alignment=ft.alignment.center),
+            ft.dropdown.Option(8, alignment=ft.Alignment(0, 0)),
+            ft.dropdown.Option(16, alignment=ft.Alignment(0, 0)),
+            ft.dropdown.Option(32, alignment=ft.Alignment(0, 0)),
+            ft.dropdown.Option(64, alignment=ft.Alignment(0, 0)),
         ],
         helper_text="Block Size",
         value=8,
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment(0, 0),
         color=ft.Colors.WHITE,
         fill_color=AppColors.BG,
         focused_color=ft.Colors.BLACK,
@@ -56,7 +74,7 @@ def statics_page(data: fs.Datasy):
         # height=850,
         content=ft.Stack(controls=[ft.Column(controls=[ip_field, block_size_field])]),
         # padding=50,
-        alignment=ft.alignment.top_center,
+        alignment=ft.Alignment(0, -1),
     )
 
     return ft.View(
@@ -68,7 +86,7 @@ def statics_page(data: fs.Datasy):
     )
 
 
-@statics.page("/info", title="Static IP Instructions", share_data=True, page_clear=True)
+@statics.page("/info", share_data=True, page_clear=True)
 def statics_info_page(data: fs.Datasy):
     """Static IP Info Page"""
     ip_network: IP.Network
@@ -90,7 +108,7 @@ def statics_info_page(data: fs.Datasy):
     view = data.view
     title = ft.Text(
         value="Uverse Static IP Instructions",
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
     statics_info = ft.Text(
@@ -102,7 +120,7 @@ def statics_info_page(data: fs.Datasy):
             f"Primary DNS: {ip_network.att_primary_dns}\n"
             f"Secondary DNS: {ip_network.att_secondary_dns}"
         ),
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
     aaris = ft.ElevatedButton(
@@ -126,7 +144,7 @@ def statics_info_page(data: fs.Datasy):
             ]
         ),
         # padding=50,
-        alignment=ft.alignment.top_center,
+        alignment=ft.Alignment(0, -1),
     )
 
     return ft.View(
@@ -138,7 +156,7 @@ def statics_info_page(data: fs.Datasy):
     )
 
 
-@statics.page("/aaris", title="Static IP Instructions", share_data=True, page_clear=True)
+@statics.page("/aaris", share_data=True, page_clear=True)
 def statics_info_aaris_page(data: fs.Datasy):
     """Static IP Info AARIS Page"""
     ip_network: IP.Network
@@ -155,7 +173,7 @@ def statics_info_aaris_page(data: fs.Datasy):
     view = data.view
     title = ft.Text(
         value="Uverse Static IP Instructions\nAARIS Gateway Instructions",
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
     statics_info = ft.Text(
@@ -172,7 +190,7 @@ def statics_info_aaris_page(data: fs.Datasy):
             "10 Set Primary DHCP Pool to Private\n"
             "11. Click Save"
         ),
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
     pace = ft.ElevatedButton(
@@ -193,7 +211,7 @@ def statics_info_aaris_page(data: fs.Datasy):
             ]
         ),
         # padding=50,
-        alignment=ft.alignment.top_center,
+        alignment=ft.Alignment(0, -1),
     )
 
     return ft.View(
@@ -205,7 +223,7 @@ def statics_info_aaris_page(data: fs.Datasy):
     )
 
 
-@statics.page("/pace", title="Static IP Instructions", share_data=True, page_clear=True)
+@statics.page("/pace", share_data=True, page_clear=True)
 def statics_info_pace_page(data: fs.Datasy):
     """Static IP Info PACE Page"""
     ip_network: IP.Network
@@ -222,7 +240,7 @@ def statics_info_pace_page(data: fs.Datasy):
     view = data.view
     title = ft.Text(
         value="Uverse Static IP Instructions\nPACE Gateway Instructions",
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
     statics_info = ft.Text(
@@ -238,7 +256,7 @@ def statics_info_pace_page(data: fs.Datasy):
             "9. Check Auto Firewall Open"
             "10. Click Save"
         ),
-        text_align=ft.alignment.center,
+        text_align=ft.TextAlign.CENTER,
         color=ft.Colors.WHITE,
     )
     pace = ft.ElevatedButton(
@@ -259,7 +277,7 @@ def statics_info_pace_page(data: fs.Datasy):
             ]
         ),
         # padding=50,
-        alignment=ft.alignment.top_center,
+        alignment=ft.Alignment(0, -1),
     )
 
     return ft.View(
