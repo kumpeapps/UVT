@@ -1,4 +1,4 @@
-version: '11.0.3({build})'
+version: '11.0.7({build})'
 environment:
   matrix:
   - job_name: "build Web"
@@ -90,7 +90,7 @@ for:
 
   build_script:
   - echo "is_mobile=0" >> .env
-  - flet build macos --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.3"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+  - flet build macos --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.7"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
 
   after_build:
   - tar -czvf jkuvt-macos.tar.gz -C build/macos "UVT.app"
@@ -133,7 +133,7 @@ for:
 
   build_script:
   - echo "is_mobile=1" >> .env
-  - flet build ipa --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.3"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+  - flet build ipa --project "jkuvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.7"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
   # --team 2T42Z3DM34
 
   after_build:
@@ -160,7 +160,10 @@ for:
   build_script:
   - echo "is_mobile=1" >> .env
   - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/UVT.jks -o /tmp/UVT.jks
-  - flet build apk --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.3"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+
+  - BUILD_VERSION=${APPVEYOR_REPO_TAG_NAME:-11.0.7}; flet build apk --project "uvt" --product "UVT" --build-version "$BUILD_VERSION" --build-number "$APPVEYOR_BUILD_NUMBER" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+
+  after_build:
   - mkdir -p artifacts
   - find build -type f -name "*.apk" -print
   - APK_PATH=$(find build -type f -name "*.apk" | head -n 1); if [ -z "$APK_PATH" ]; then echo "No APK artifact found under build/."; find build -maxdepth 4 -type d -print; exit 1; fi
@@ -187,7 +190,10 @@ for:
   build_script:
   - echo "is_mobile=1" >> .env
   - curl https://$MATCH_DEPLOY_KEY@raw.githubusercontent.com/kumpeapps/android_certs/main/UVT.jks -o /tmp/UVT.jks
-  - flet build aab --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.3"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+
+  - BUILD_VERSION=${APPVEYOR_REPO_TAG_NAME:-11.0.7}; flet build aab --project "uvt" --product "UVT" --build-version "$BUILD_VERSION" --build-number "$APPVEYOR_BUILD_NUMBER" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+
+  after_build:
   - mkdir -p artifacts
   - find build -type f -name "*.aab" -print
   - AAB_PATH=$(find build -type f -name "*.aab" | head -n 1); if [ -z "$AAB_PATH" ]; then echo "No AAB artifact found under build/."; find build -maxdepth 4 -type d -print; exit 1; fi
@@ -212,7 +218,7 @@ for:
     - MATCH_DEPLOY_KEY: $MATCH_DEPLOY_KEY
 
   build_script:
-  - flet build web --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.3"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+  - flet build web --project "uvt" --product "UVT" --build-version "${APPVEYOR_REPO_TAG_NAME:-"11.0.7"}" --build-number $APPVEYOR_BUILD_NUMBER --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
 
   after_build:
   - tar -czvf jkuvt-web.tar.gz -C build web

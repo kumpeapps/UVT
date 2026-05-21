@@ -1,0 +1,311 @@
+name: Build And Release
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "*"
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.11"
+  FLUTTER_VERSION: "3.41.7"
+  DEFAULT_BUILD_VERSION: "11.0.7"
+
+jobs:
+  build-android-apk:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    env:
+      SERVICE_TOKEN: ${{ secrets.SERVICE_TOKEN }}
+      ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+      FLET_ANDROID_SIGNING_KEY_STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      FLET_ANDROID_SIGNING_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          flutter config --no-analytics
+          flutter doctor -v
+
+      - name: Validate Android keystore secret
+        run: |
+          if [[ -z "${ANDROID_KEYSTORE_B64:-}" ]]; then
+            echo "ANDROID_KEYSTORE_B64 is not set. Add a base64-encoded UVT.jks as a repository secret."
+            exit 1
+          fi
+          if [[ -z "${FLET_ANDROID_SIGNING_KEY_STORE_PASSWORD:-}" ]]; then
+            echo "ANDROID_KEYSTORE_PASSWORD is not set. Add it as a repository secret."
+            exit 1
+          fi
+
+      - name: Normalize Android signing passwords
+        run: |
+          if [[ -z "${FLET_ANDROID_SIGNING_KEY_PASSWORD:-}" ]]; then
+            echo "FLET_ANDROID_SIGNING_KEY_PASSWORD=${FLET_ANDROID_SIGNING_KEY_STORE_PASSWORD}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Configure Gradle compatibility
+        run: |
+          mkdir -p ~/.gradle
+          {
+            echo "android.newDsl=false"
+          } >> ~/.gradle/gradle.properties
+
+      - name: Stage Android keystore
+        run: |
+          echo "${ANDROID_KEYSTORE_B64}" | base64 --decode > /tmp/UVT.jks
+          ls -lh /tmp/UVT.jks
+
+      - name: Build APK
+        run: |
+          set -euo pipefail
+          BUILD_VERSION="${DEFAULT_BUILD_VERSION}"
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            BUILD_VERSION="${GITHUB_REF_NAME}"
+          fi
+
+          {
+            echo "APP_ENV=prod"
+            echo "SERVICE_TOKEN=${SERVICE_TOKEN}"
+            echo "VERSION=${BUILD_VERSION}"
+            echo "BUILD=${GITHUB_RUN_NUMBER}"
+            echo "is_mobile=1"
+          } > .env
+
+          flet build apk --project "uvt" --product "UVT" --build-version "${BUILD_VERSION}" --build-number "${GITHUB_RUN_NUMBER}" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+
+          mkdir -p artifacts
+          find build -type f -name "*.apk" -print
+          APK_PATH=$(find build -type f -name "*.apk" | head -n 1)
+          if [[ -z "${APK_PATH}" ]]; then
+            echo "No APK artifact found under build/."
+            find build -maxdepth 4 -type d -print
+            exit 1
+          fi
+
+          cp "${APK_PATH}" artifacts/jkuvt.apk
+          ls -lh artifacts/jkuvt.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: artifacts/jkuvt.apk
+
+  build-android-aab:
+    name: Build Android AAB
+    runs-on: ubuntu-latest
+    env:
+      SERVICE_TOKEN: ${{ secrets.SERVICE_TOKEN }}
+      ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+      FLET_ANDROID_SIGNING_KEY_STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      FLET_ANDROID_SIGNING_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          flutter config --no-analytics
+          flutter doctor -v
+
+      - name: Validate Android keystore secret
+        run: |
+          if [[ -z "${ANDROID_KEYSTORE_B64:-}" ]]; then
+            echo "ANDROID_KEYSTORE_B64 is not set. Add a base64-encoded UVT.jks as a repository secret."
+            exit 1
+          fi
+          if [[ -z "${FLET_ANDROID_SIGNING_KEY_STORE_PASSWORD:-}" ]]; then
+            echo "ANDROID_KEYSTORE_PASSWORD is not set. Add it as a repository secret."
+            exit 1
+          fi
+
+      - name: Normalize Android signing passwords
+        run: |
+          if [[ -z "${FLET_ANDROID_SIGNING_KEY_PASSWORD:-}" ]]; then
+            echo "FLET_ANDROID_SIGNING_KEY_PASSWORD=${FLET_ANDROID_SIGNING_KEY_STORE_PASSWORD}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Configure Gradle compatibility
+        run: |
+          mkdir -p ~/.gradle
+          {
+            echo "android.newDsl=false"
+          } >> ~/.gradle/gradle.properties
+
+      - name: Stage Android keystore
+        run: |
+          echo "${ANDROID_KEYSTORE_B64}" | base64 --decode > /tmp/UVT.jks
+          ls -lh /tmp/UVT.jks
+
+      - name: Build AAB
+        run: |
+          set -euo pipefail
+          BUILD_VERSION="${DEFAULT_BUILD_VERSION}"
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            BUILD_VERSION="${GITHUB_REF_NAME}"
+          fi
+
+          {
+            echo "APP_ENV=prod"
+            echo "SERVICE_TOKEN=${SERVICE_TOKEN}"
+            echo "VERSION=${BUILD_VERSION}"
+            echo "BUILD=${GITHUB_RUN_NUMBER}"
+            echo "is_mobile=1"
+          } > .env
+
+          flet build aab --project "uvt" --product "UVT" --build-version "${BUILD_VERSION}" --build-number "${GITHUB_RUN_NUMBER}" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+
+          mkdir -p artifacts
+          find build -type f -name "*.aab" -print
+          AAB_PATH=$(find build -type f -name "*.aab" | head -n 1)
+          if [[ -z "${AAB_PATH}" ]]; then
+            echo "No AAB artifact found under build/."
+            find build -maxdepth 4 -type d -print
+            exit 1
+          fi
+
+          cp "${AAB_PATH}" artifacts/jkuvt.aab
+          ls -lh artifacts/jkuvt.aab
+
+      - name: Upload AAB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-aab
+          path: artifacts/jkuvt.aab
+
+  build-web:
+    name: Build Web
+    runs-on: ubuntu-latest
+    env:
+      SERVICE_TOKEN: ${{ secrets.SERVICE_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          flutter config --no-analytics
+          flutter doctor -v
+
+      - name: Build Web bundle
+        run: |
+          set -euo pipefail
+          BUILD_VERSION="${DEFAULT_BUILD_VERSION}"
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            BUILD_VERSION="${GITHUB_REF_NAME}"
+          fi
+
+          {
+            echo "APP_ENV=prod"
+            echo "SERVICE_TOKEN=${SERVICE_TOKEN}"
+            echo "VERSION=${BUILD_VERSION}"
+            echo "BUILD=${GITHUB_RUN_NUMBER}"
+          } > .env
+
+          flet build web --project "uvt" --product "UVT" --build-version "${BUILD_VERSION}" --build-number "${GITHUB_RUN_NUMBER}" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+          tar -czvf jkuvt-web.tar.gz -C build web
+
+      - name: Upload Web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-tarball
+          path: jkuvt-web.tar.gz
+
+  publish-release:
+    name: Publish GitHub Release Artifacts
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+      - build-android-apk
+      - build-android-aab
+      - build-web
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download APK artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: android-apk
+          path: release-assets
+
+      - name: Download AAB artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: android-aab
+          path: release-assets
+
+      - name: Download Web artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web-tarball
+          path: release-assets
+
+      - name: Publish release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: |
+            release-assets/jkuvt.apk
+            release-assets/jkuvt.aab
+            release-assets/jkuvt-web.tar.gz

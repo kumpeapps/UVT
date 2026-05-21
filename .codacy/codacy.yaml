@@ -1,5 +1,4 @@
-runtimes:
-    - python@3.11.11
 tools:
+    - eslint@8.57.0
     - lizard@1.17.31
-    - trivy@0.69.3
+.2
