@@ -100,7 +100,8 @@ jobs:
             echo "is_mobile=1"
           } > .env
 
-          flet build apk --project "uvt" --product "UVT" --build-version "${BUILD_VERSION}" --build-number "${GITHUB_RUN_NUMBER}" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+          # Keep project slug stable to preserve package ID for upgrade compatibility.
+          flet build apk --project "jkuvt" --product "UVT" --build-version "${BUILD_VERSION}" --build-number "${GITHUB_RUN_NUMBER}" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
 
           mkdir -p artifacts
           find build -type f -name "*.apk" -print
@@ -201,7 +202,8 @@ jobs:
             echo "is_mobile=1"
           } > .env
 
-          flet build aab --project "uvt" --product "UVT" --build-version "${BUILD_VERSION}" --build-number "${GITHUB_RUN_NUMBER}" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+          # Keep project slug stable to preserve package ID for upgrade compatibility.
+          flet build aab --project "jkuvt" --product "UVT" --build-version "${BUILD_VERSION}" --build-number "${GITHUB_RUN_NUMBER}" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
 
           mkdir -p artifacts
           find build -type f -name "*.aab" -print
@@ -263,7 +265,7 @@ jobs:
             echo "BUILD=${GITHUB_RUN_NUMBER}"
           } > .env
 
-          flet build web --project "uvt" --product "UVT" --build-version "${BUILD_VERSION}" --build-number "${GITHUB_RUN_NUMBER}" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
+          flet build web --project "jkuvt" --product "UVT" --build-version "${BUILD_VERSION}" --build-number "${GITHUB_RUN_NUMBER}" --copyright "Copyright (c) 2026 KumpeApps LLC" --org net.justinkumpe.apps --company "KumpeApps LLC"
           tar -czvf jkuvt-web.tar.gz -C build web
 
       - name: Upload Web artifact
